@@ -10,10 +10,11 @@
                 <div class=" text-center p-5 d-flex align-items-center justify-content-center">
                     <div>
                         <div class="mb-5">
-                            <img src="{{asset('assets/images/authentication/2.png')}}" class="authentication-image w-100" alt="">
+                            <img src="{{ asset('assets/images/authentication/2.png') }}"
+                                class="authentication-image w-100" alt="">
                         </div>
                         <h6 class="fw-semibold ">Sign In</h6>
-                        <p class="fw-normal fs-14 op-7"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa eligendi expedita aliquam quaerat nulla voluptas facilis. Porro rem voluptates possimus, ad, autem quae culpa architecto, quam labore blanditiis at ratione.</p>
+                        <p class="fw-normal fs-14 op-7"> test</p>
                     </div>
                 </div>
             </div>
@@ -30,35 +31,48 @@
                         </a>
                     </div> --}}
                     <p class="h5 fw-semibold mb-2">Sign In</p>
-                    <form action="{{route('login')}}" method="post">
-                        <div class="row gy-3 mt-3">
+                    <div class="row gy-3">
+                        <form action="{{ route('login') }}" method="POST">
+                            @csrf
                             <div class="col-xl-12 mt-0">
-                                <label for="signin-username" class="form-label text-default">User Name</label>
-                                <input type="text" class="form-control form-control-lg" id="signin-username" placeholder="user name" name="email" value="{{old('email')}}" required autofocus autocomplete="username">
+                                <label for="email" class="form-label text-default">Email</label>
+                                <input type="email" name="email" class="form-control form-control-lg" id="email"
+                                    value="{{ old('email') }}">
                             </div>
-                            <div class="col-xl-12 mb-3">
-                                <label for="signin-password" class="form-label text-default d-block">Password<a href="forgot.html" class="float-end text-danger">Forget password ?</a></label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control form-control-lg" id="signin-password" placeholder="password" name="password"
-                                    required autocomplete="current-password" >
-                                    <button class="btn btn-light" type="button" onclick="createpassword('signin-password',this)" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
+
+                            <div class="col-xl-12 mt-0">
+                              
+                                    <label for="password" class="form-label text-default d-block">Password</label>
+                                    <input type="password" name="password" class="form-control form-control-lg"
+                                        id="signin-password" placeholder="password">
+                                    <button class="btn btn-light border border-black border-1" type="button"
+                                        onclick="createpassword('signin-password',this)" id="button-addon2"><i
+                                            class="ri-eye-off-line align-middle"></i></button>
+                                    @if (Route::has('password.request'))
+                                        <a class="float-end text-danger" href="{{ route('password.request') }}">
+                                            {{ __('Forgot your password?') }}
+                                        </a>
+                                    @endif
+                            
+                                    {{-- <div class="input-group">
+                                    <input type="password" class="form-control form-control-lg" id="signin-password" placeholder="password">
+                                </div> --}}
+                                                          
+                            </div>
+                            <div class="mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
+                                        Remember password ?
+                                    </label>
                                 </div>
-                                <div class="mt-2">
-                                    <div class="form-check">
-                                        <label class="form-check-label text-muted fw-normal" for="defaultCheck1">
-                                            <input id="remember_me" type="checkbox" class="rounded form-check-label text-muted fw-normal border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                                            Remember password ?
-                                        </label>
-                                        
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-xl-12 d-grid mt-2">
-                                <button type="submit" class="btn btn-lg btn-primary">Sign In</button>
-                                {{-- <a href="index.html" class="btn btn-lg btn-primary">Sign In</a> --}}
+
+                            <div class="col-xl-12 mt-0">
+                                <button type="submit" class="btn btn-primary">Sign In</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
