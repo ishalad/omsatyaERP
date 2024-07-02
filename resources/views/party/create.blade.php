@@ -28,23 +28,32 @@
                         {{ $title }}
                     </div>
                 </div>
-                <form action="{{ route('parties.store') }}" method="POST">
+                @if ($errors->any())
+                    <div class="alert alert-danger mt-3">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="text-danger">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route('parties.store') }}" method="POST" id="party-form">
                     @csrf
+                    <input type="hidden" class="form-control"
+                        placeholder="Firm Id"  value="{{ App\Models\Firm::first()->id}}" name="firm_id">
                     {{-- @include('partials.alert') --}}
                     <div class="card-body gy-4">
-                        <div class="row mb-2">
+                        {{-- <div class="row mb-2">
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="input-disabled" class="form-label">Firm Id</label>
-                                <input type="hidden" id="input-disabled" class="form-control"
-                                    placeholder="Firm Id" disabled="" value="{{ App\Models\Firm::first()->id}}">
                             </div>
-                        </div>
+                        </div> --}}
     
                         <div class="row mb-2">
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <label for="inputName" class="col-form-label">Party Name</label>
                                 <input type="text" id="inputName" class="form-control"
-                                    aria-describedby="nameHelpInline" name="name">
+                                    aria-describedby="nameHelpInline" name="name" value="{{ old('name') }}">
                             </div>
                             <!-- <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputshort" class="col-form-label">short code</label>
@@ -57,18 +66,29 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <label for="input-textarea" class="col-form-label">Address</label>
                                 <textarea type="text" class="form-control" id="input-textarea"
-                                    placeholder="Address..." name="address"></textarea>
+                                    placeholder="Address..." name="address">{{old('address')}}</textarea>
                             </div>
                         </div>
-    
+                        <div class="row mb-2">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <label for="inputName" class="col-form-label">Pincode</label>
+                            <input type="number"  class="form-control" maxlength="6"
+                                aria-describedby="nameHelpInline" name="pincode" value="{{ old('pincode') }}">
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <label for="inputshort" class="col-form-label">Mobile no.</label>
+                            <input type="tel" id="inputshort" class="form-control"
+                                aria-describedby="nameHelpInline" name="phone_no" value="{{ old('phone_no') }}">
+                        </div>
+                        </div>
                         <div class="row mb-2">
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputshort" class="col-form-label">City</label>
                                 <select class="form-control" data-trigger 
                                     id="city" name="city_id">
-                                    <option value="">Choose a city</option>
+                                    <option value="">Choose a Option</option>
                                     @foreach (App\Models\City::all() as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" @if(old('city_id') == $item->id) selected @endif>{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -76,57 +96,45 @@
                                 <label for="inputState" class="col-form-label">State</label>
                                 <select class="form-control" data-trigger 
                                     id="state" name="state_id">
-                                    <option value="">Choose a State</option>
+                                    <option value="">Choose a Option</option>
                                     @foreach (App\Models\State::all() as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" @if(old('state_id') == $item->id) selected @endif>{{ $item->name }}</option>
                                     @endforeach
 
                                 </select>
                             </div>
                         </div>
-    
+                        
                         <div class="row mb-2">
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                <label for="inputshort" class="col-form-label">Mobile no.</label>
-                                <input type="number" id="inputshort" class="form-control"
-                                    aria-describedby="nameHelpInline" name="phone_no">
-                            </div>
-    
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                <label for="inputGst" class="col-form-label">Gst no.</label>
-                                <input type="number" id="inputGst" class="form-control"
-                                    aria-describedby="nameHelpInline" name="gst_no">
-                            </div>
-                        </div>
-    
-                        <div class="row mb-2">
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                <label for="inputReg" class="col-form-label">Reg. no.</label>
-                                <input type="number" id="inputReg" class="form-control"
-                                    aria-describedby="nameHelpInline">
-                            </div>
-    
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputArea" class="col-form-label">Area</label>
                                 <select class="form-control" data-trigger 
                                     id="area" name="area_id">
-                                    <option value="">Choose a State</option>
+                                    <option value="">Choose a Option</option>
                                     @foreach (App\Models\Area::all() as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                           
     
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                <label for="inputGst" class="col-form-label">Gst no.</label>
+                                <input type="text" id="inputGst" class="form-control"
+                                    aria-describedby="nameHelpInline" name="gst_no" value="{{ old('gst_no') }}">
+                            </div>
                         </div>
     
                         <div class="row mb-2">
+    
+    
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputPan" class="col-form-label">Cont.Person</label>
                                 <select class="form-control" data-trigger 
                                 id="contact_person_id" name="contact_person_id">
-                                    <option value="">Choose a State</option>
+                                    <option value="">Choose a Option</option>
                                     @foreach (App\Models\ContactPerson::all() as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" @if(old('contact_person_id') == $item->id) selected @endif>{{ $item->name }}</option>
                                     @endforeach
                             </select>
                             </div>
@@ -134,9 +142,9 @@
                                 <label for="inputOwner" class="col-form-label">Owner Name</label>
                                 <select class="form-control" data-trigger 
                                 id="owner_id" name="owner_id">
-                                    <option value="">Choose a State</option>
+                                    <option value="">Choose a Option</option>
                                     @foreach (App\Models\Owner::all() as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" @if(old('owner_id') == $item->id) selected @endif>{{ $item->name }}</option>
                                     @endforeach
                             </select>
                             </div>
@@ -186,13 +194,33 @@
 
 </div>
 @endSection
-@push('scripts')
+@section('scripts')
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    // $(document).ready(function() {
+    //     $("#party-form").on("submit", function(e) {
+    //         e.preventDefault();
+    //         var form = $(this);
+    //         var url = form.attr('action');
+    //         $.ajax({
+    //             type: "POST",
+    //             url: url,
+    //             data: form.serialize(),
+    //             success: function(data) {
+    //                 if (data.success) {
+    //                     window.location.href = "{{ route('parties.index') }}";
+    //                 }
+    //             },
+    //             error: function(data) {
+    //                 console.log('Error:', data);
+    //             }
+    //         });
+    //     });
 
-<!-- Laravel Javascript Validation -->
-<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+    // });
 
-{!! JsValidator::formRequest('App\Http\Requests\PartyCreateRequest') !!}
+</script>
 
-@endpush
+
+@endSection

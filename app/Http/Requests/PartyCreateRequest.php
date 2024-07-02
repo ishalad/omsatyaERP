@@ -23,6 +23,10 @@ class PartyCreateRequest extends FormRequest
     {
         return [
             "name" => "required|string",
+            "address" => "required",
+            "phone_no" => "required|numeric|digits:11",
+            "gst_no" => "required|alphanum|size:15",
+            "pincode" => "required|numeric|digits:6",
         ];
     }
 }

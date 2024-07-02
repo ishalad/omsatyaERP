@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('years', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('from_date');
-            $table->string('to_date');
+            $table->date('from_date');
+            $table->date('to_date');
             $table->timestamps();
         });
     }

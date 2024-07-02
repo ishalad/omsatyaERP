@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\partiesDataTable;
 use App\Http\Requests\PartyCreateRequest;
 use App\Models\Party;
+use Flasher\Toastr\Laravel\Facade\Toastr;
 use Illuminate\Http\Request;
 
 class PartyController extends Controller
@@ -11,11 +13,10 @@ class PartyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(partiesDataTable $dataTable)
     {
         $data['title'] = 'Party List';
-        // $data['party'] = Party::all();
-        return view('party.index', $data);
+        return $dataTable->render('party.index', $data);
     }
 
     /**
@@ -33,7 +34,14 @@ class PartyController extends Controller
     public function store(PartyCreateRequest $request)
     {
         $data = $request->all();
-        $data["created_by"] = Party::create($data);
+        if ($request->validated()) {
+            Party::create($data);
+            Toastr::success('Party created successfully');
+            return redirect()->route('parties.index')->with('success', 'Party created successfully');
+        } else {
+            return redirect()->route('parties.create')->with($request->errors());
+        }
+
     }
 
     /**
@@ -49,15 +57,24 @@ class PartyController extends Controller
      */
     public function edit(Party $party)
     {
-        //
+        $data['title'] = 'Edit Party';
+        $data['party'] = $party;
+        return view("party.edit", $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Party $party)
+    public function update(PartyCreateRequest $request, Party $party)
     {
-        //
+        $data = $request->all();
+        if ($request->validated()) {
+            $party->update($data);
+            Toastr::success('Party updated successfully');
+            return redirect()->route('parties.index')->with('success', 'Party updated successfully');
+        } else {
+            return redirect()->route('parties.edit', $party)->with($request->errors());
+        }
     }
 
     /**
@@ -65,6 +82,8 @@ class PartyController extends Controller
      */
     public function destroy(Party $party)
     {
-        //
+        $party->delete();
+        Toastr::success('Party deleted successfully');
+        return response()->json(['message' => 'Party deleted successfully']);
     }
 }

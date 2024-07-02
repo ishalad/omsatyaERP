@@ -526,7 +526,7 @@
         </div>
         <div class="page">
             <div id="loader">
-                <img src="../assets/images/media/loader.svg" alt="">
+                <img src="{{asset('images/media/loader.svg')}}" alt="">
             </div>
             @include('layouts.header')
             @include('layouts.sidebar')
@@ -709,7 +709,7 @@
                                     <div class="list-group-item d-flex align-items-center ">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/13.jpg" alt="img">
+                                                <img src="{{asset('images/faces/13.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -720,7 +720,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/12.jpg" alt="img">
+                                                <img src="{{asset('images/faces/12.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -731,7 +731,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/11.jpg" alt="img">
+                                                <img src="{{asset('images/faces/11.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -742,7 +742,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/10.jpg" alt="img">
+                                                <img src="{{asset('images/faces/10.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -753,7 +753,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/19.jpg" alt="img">
+                                                <img src="{{asset('images/faces/19.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -764,7 +764,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/8.jpg" alt="img">
+                                                <img src="{{asset('images/faces/8.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -775,7 +775,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/7.jpg" alt="img">
+                                                <img src="{{asset('images/faces/7.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -790,7 +790,7 @@
                                     <div class="list-group-item d-flex align-items-center ">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/13.jpg" alt="img">
+                                                <img src="{{asset('images/faces/13.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -808,7 +808,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/3.jpg" alt="img">
+                                                <img src="{{asset('images/faces/3.jpg')}}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -823,10 +823,10 @@
                                                     class="fa fa-facebook"></i></a>
                                         </div>
                                     </div>
-                                    <div class="list-group-item d-flex align-items-center border-top">
+                                    {{-- <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/2.jpg" alt="img">
+                                                <img src="images/faces/2.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -844,7 +844,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/1.jpg" alt="img">
+                                                <img src="images/faces/1.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -862,7 +862,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/5.jpg" alt="img">
+                                                <img src="images/faces/5.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -880,7 +880,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/6.jpg" alt="img">
+                                                <img src="images/faces/6.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -898,7 +898,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/7.jpg" alt="img">
+                                                <img src="images/faces/7.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -916,7 +916,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/8.jpg" alt="img">
+                                                <img src="images/faces/8.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -934,7 +934,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/9.jpg" alt="img">
+                                                <img src="images/faces/9.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -952,7 +952,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/10.jpg" alt="img">
+                                                <img src="images/faces/10.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -970,7 +970,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/12.jpg" alt="img">
+                                                <img src="images/faces/12.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -988,7 +988,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="../assets/images/faces/14.jpg" alt="img">
+                                                <img src="images/faces/14.jpg" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -1002,7 +1002,7 @@
                                                 data-bs-toggle="modal" data-bs-target="#chatmodel"><i
                                                     class="fa fa-facebook"></i></a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -1045,6 +1045,7 @@
 
 
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
         <!-- Custom-Switcher JS -->

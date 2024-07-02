@@ -29,25 +29,17 @@
                     <div class="prism-toggle d-flex gap-3">
                         <div class="header-element profile-1">
                             <!-- Start::header-link|dropdown-toggle -->
-                            <a href="" class=" btn btn-primary dropdown-toggle leading-none header-link d-flex justify-content-center align-items-center" id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                Export
-                            </a>
-                            <!-- End::header-link|dropdown-toggle -->
-                            <div class="main-header-dropdown dropdown-menu dropdown-menu-end overflow-hidden profile-dropdown" data-popper-placement="none">
-                                <a class="dropdown-item d-flex" href="#"><i class="bx bxs-file-pdf fs-18  me-2"></i>PDF</a>
-                                <a class="dropdown-item d-flex" href="#"><i class="bx bx-printer  fs-18  me-2"></i> Print</a>
-                                <a class="dropdown-item d-flex" href="#"><i class="bx bxs-inbox  fs-18  me-2"></i>Excel</a>
-                                
-                            </div>
+                            
+                            <a href="{{route('parties.create')}}" class="btn btn-md btn-primary "> Create </a>
                         </div>
-                        <a href="{{route('parties.create')}}" class="btn btn-md btn-primary "> Create </a>
                         
                         
                     </div>
                     
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    {{ $dataTable->table() }}
+                    {{-- <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
@@ -79,9 +71,9 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> --}}
 
-                    <div class="table-responsive">
+                     {{-- <div class="table-responsive">
                         <table class="table text-nowrap table-bordered">
                             <thead class="table-secondary bg-gray">
                                 <tr>
@@ -102,7 +94,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
+                            <tbody>
                                 <tr>
                                     <td>#F-182</td>
                                     <th>Harshrath M. Patel</th>
@@ -293,11 +285,11 @@
                                 </tr>
 
 
-                            </tbody> --}}
+                            </tbody>
                         </table>
-                    </div>
+                    </div> --}}
 
-                    <div class="pagenation-footer mt-3">
+                    {{-- <div class="pagenation-footer mt-3">
                         <div class="row ">
                             <div class="col-md-12 col-sm-12 justify-content-end">
                                 <div class="pagenation-num d-flex justify-content-end gap-5 align-content-center align-items-center">
@@ -324,7 +316,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
             </div>
@@ -332,4 +324,51 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            window.deleteParty = function(party) {
+                // event.preventDefault();
+                Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ route('parties.destroy', ':party') }}".replace(':party', party),
+                        data:{
+                            '_token': '{{ csrf_token() }}',
+                        },
+                        success: function(data) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                                });
+                            if (data.success) {
+                                window.location.reload();
+                            }
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                   
+                }
+                });
+            }                            
+        });
+    </script>
 @endsection

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('parties', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->string('address');
             $table->unsignedBigInteger('city_id'); // Foreign key to cities
@@ -31,7 +32,7 @@ return new class extends Migration
             $table->foreign('firm_id')->references('id')->on('firms')->onDelete('cascade');
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
-            $table->foreign('contact_person_id')->references('id')->on('contact_persons')->onDelete('cascade');
+            $table->foreign('contact_person_id')->references('id')->on('contacphp t_persons')->onDelete('cascade');
         });
     }
 

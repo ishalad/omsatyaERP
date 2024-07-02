@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MachineSaleEntryController;
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('parties', PartyController::class)->middleware(['auth']);
+Route::resource('machine-sales', MachineSaleEntryController::class)->middleware(['auth']);
 // Route::group(['prefix'=> 'party'], function () {
 // });
 

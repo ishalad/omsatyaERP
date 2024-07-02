@@ -10,15 +10,15 @@
             <div class="header-element">
                 <div class="horizontal-logo">
                     <a href="index.html" class="header-logo">
-                        <img src="../assets/images/brand-logos/desktop-logo.png" alt="logo"
+                        <img src="{{asset('images/brand-logos/desktop-logo.png')}}" alt="logo"
                             class="desktop-logo">
-                        <img src="../assets/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
-                        <img src="../assets/images/brand-logos/desktop-white.png" alt="logo"
+                        <img src="{{asset('images/brand-logos/toggle-logo.png')}}" alt="logo" class="toggle-logo">
+                        <img src="{{asset('images/brand-logos/desktop-white.png')}}" alt="logo"
                             class="desktop-dark">
-                        <img src="../assets/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark">
-                        <img src="../assets/images/brand-logos/desktop-white.png" alt="logo"
+                        <img src="{{asset('images/brand-logos/toggle-dark.png')}}" alt="logo" class="toggle-dark">
+                        <img src="{{asset('images/brand-logos/desktop-white.png')}}" alt="logo"
                             class="desktop-white">
-                        <img src="../assets/images/brand-logos/toggle-white.png" alt="logo"
+                        <img src="{{asset('images/brand-logos/toggle-white.png')}}" alt="logo"
                             class="toggle-white">
                     </a>
                 </div>
@@ -126,7 +126,7 @@
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
-                                    <img src="../assets/images/faces/1.jpg" alt="img"
+                                    <img src="{{asset('images/faces/1.jpg')}}" alt="img"
                                         class="rounded-circle avatar">
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -149,7 +149,7 @@
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
-                                    <img src="../assets/images/faces/2.jpg" alt="img"
+                                    <img src="{{asset('images/faces/2.jpg')}}" alt="img"
                                         class="rounded-circle avatar">
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -172,7 +172,7 @@
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
-                                    <img src="../assets/images/faces/3.jpg" alt="img"
+                                    <img src="{{asset('images/faces/3.jpg')}}" alt="img"
                                         class="rounded-circle avatar">
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -195,7 +195,7 @@
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
-                                    <img src="../assets/images/faces/4.jpg" alt="img"
+                                    <img src="{{asset('images/faces/4.jpg')}}" alt="img"
                                         class="rounded-circle avatar">
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -218,7 +218,7 @@
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start">
                                 <div class="pe-2">
-                                    <img src="../assets/images/faces/2.jpg" alt="img"
+                                    <img src="{{asset('images/faces/2.jpg')}}" alt="img"
                                         class="rounded-circle avatar">
                                 </div>
                                 <div class="flex-grow-1 d-flex align-items-center justify-content-between">
@@ -430,7 +430,7 @@
                     <ul class="list-unstyled mb-0" id="header-cart-items-scroll">
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start cart-dropdown-item">
-                                <img src="../assets/images/ecommerce/1.jpg" alt="img"
+                                <img src="/images/ecommerce/1.jpg" alt="img"
                                     class="avatar avatar-md avatar-rounded br-5 me-3">
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-start justify-content-between mb-0">
@@ -454,7 +454,7 @@
                         </li>
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start cart-dropdown-item">
-                                <img src="../assets/images/ecommerce/3.jpg" alt="img"
+                                <img src="/images/ecommerce/3.jpg" alt="img"
                                     class="avatar avatar-md avatar-rounded br-5 me-3">
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-start justify-content-between mb-0">
@@ -478,7 +478,7 @@
                         </li>
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start cart-dropdown-item">
-                                <img src="../assets/images/ecommerce/5.jpg" alt="img"
+                                <img src="/images/ecommerce/5.jpg" alt="img"
                                     class="avatar avatar-md avatar-rounded br-5 me-3">
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-start justify-content-between mb-0">
@@ -502,7 +502,7 @@
                         </li>
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start cart-dropdown-item">
-                                <img src="../assets/images/ecommerce/4.jpg" alt="img"
+                                <img src="/images/ecommerce/4.jpg" alt="img"
                                     class="avatar avatar-md avatar-rounded br-5 me-3">
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-start justify-content-between mb-0">
@@ -526,7 +526,7 @@
                         </li>
                         <li class="dropdown-item">
                             <div class="d-flex align-items-start cart-dropdown-item">
-                                <img src="../assets/images/ecommerce/6.jpg" alt="img"
+                                <img src="/images/ecommerce/6.jpg" alt="img"
                                     class="avatar avatar-md avatar-rounded br-5 me-3">
                                 <div class="flex-grow-1">
                                     <div class="d-flex align-items-start justify-content-between mb-0">
@@ -578,7 +578,7 @@
                     class=" dropdown-toggle leading-none header-link d-flex justify-content-center"
                     id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                     aria-expanded="false">
-                    <img src="../assets/images/faces/9.jpg" alt="img" width="32" height="32"
+                    <img src="/images/faces/9.jpg" alt="img" width="32" height="32"
                         class="rounded-circle">
                     <!-- <div class="d-flex align-items-center">
                 </div> -->
@@ -589,7 +589,7 @@
                     <div class="main-header-profile bg-primary border-bottom p-3">
                         <div class="d-flex wd-100p">
                             <div class="main-img-user">
-                                <img alt="" src="../assets/images/faces/9.jpg" class="avatar avatar-md">
+                                <img alt="" src="/images/faces/9.jpg" class="avatar avatar-md">
                             </div>
                             <div class="ms-2 my-auto text-white">
                                 <h6 class="mb-0 text-fixed-white">Petey Cruiser</h6>

@@ -4,8 +4,8 @@
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
         <a href="index.html" class="header-logo">
-            <img src="../assets/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
-            <img src="../assets/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
+            <img src="{{asset('images/brand-logos/desktop-logo.png')}}" alt="logo" class="desktop-logo">
+            <img src="{{asset('images/brand-logos/toggle-logo.png')}}" alt="logo" class="toggle-logo">
         </a>
     </div>
     <!-- End::main-sidebar-header -->
@@ -41,15 +41,15 @@
                     </a>
                 </li>
 
-                <li class="slide">
+                {{-- <li class="slide">
                     <a href="product-list.html" class="side-menu__item">
                         <i class="bx bx-package side-menu__icon"></i>
                         <span class="side-menu__label">Product</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="slide">
-                    <a href="sells-list.html" class="side-menu__item">
+                    <a href="{{route('machine-sales.index')}}" class="side-menu__item">
                         <i class="bx bx-cart side-menu__icon"></i>
                         <span class="side-menu__label">Machines Sells</span>
                     </a>
