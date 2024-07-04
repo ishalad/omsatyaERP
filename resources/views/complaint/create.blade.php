@@ -27,10 +27,20 @@
                         </div>
                     </div>
                     <div class="card-body gy-4">
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger mt-3">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li class="text-danger">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="{{ route('complaints.store') }}" method="POST" id="complaint-form">
                             @csrf
-
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="firm_id" value="{{ App\Models\Firm::first()->id }}">
+                            <input type="hidden" name="year_id" value="{{ App\Models\Year::first()->id }}">
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="input-Date" class="form-label">Date</label>
@@ -46,7 +56,7 @@
 
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputComplain" class="col-form-label">Complain No.</label>
+                                    <label for="inputComplain" class="col-form-label">Sales Entry</label>
                                     <select type="text" id="sales_entry_id" name="sales_entry_id" class="form-control">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\MachineSalesEntry::all() as $item)
@@ -89,7 +99,7 @@
                             </div>
 
                             <div class="row mb-1">
-                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Service Type</label>
                                     <select class="form-control" data-trigger name="service_type_id" id="service_type_id">
                                         <option value="">Choose a Service Type</option>
@@ -98,7 +108,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputStatus" class="col-form-label">Status</label>
                                     <select class="form-control" data-trigger name="status_id" id="status_id">
                                         <option value="">Choose a Product</option>
@@ -111,10 +121,9 @@
 
 
                             <div class="row mb-1">
-                                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                                <div class="form-group col-xl-6 col-lg-6 col-md-8 col-sm-12">
                                     <label for="inputRemark" class="col-form-label">Remark</label>
-                                    <input type="text" id="inputJointengg" class="form-control"
-                                        aria-describedby="nameHelpInline">
+                                    <textarea type="text" id="remark" class="form-control" name="remarks" aria-describedby="nameHelpInline"> </textarea>
                                 </div>
 
                             </div>
@@ -123,9 +132,9 @@
                                 <div
                                     class=" p-3 header-secondary row client-name-wpr bg-primary-transparent d-flex align-items-center gap-1">
                                     <div class="form-check form-check-md form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="switch-md"
+                                        <input class="form-check-input" type="checkbox" id="switch-md" role="checkbox"
                                             data-bs-toggle="collapse" href="#multiCollapseExample1" aria-expanded="false"
-                                            aria-controls="multiCollapseExample1">
+                                            aria-controls="multiCollapseExample1" name="engineer_select">
                                         <h5 class="px-4 mb-0" for="switch-md">Engineer Select</h5>
                                     </div>
                                 </div>
@@ -150,8 +159,8 @@
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputJointengg" class="col-form-label">Actual
                                                         Complain</label>
-                                                    <select class="form-control" data-trigger name="complaint_type_id"
-                                                        id="complaint_type_id">
+                                                    <select class="form-control" data-trigger name="engineer_complaint_id"
+                                                        id="engineer_complaint_id">
                                                         <option value="">Choose a Option</option>
                                                         @foreach (App\Models\ComplaintType::all() as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}
@@ -246,95 +255,67 @@
 @endSection
 
 @section('scripts')
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#party-form').validate({
+            $("#switch-md").on("change", function() {
+                this.setAttribute("checked", true);
+            });
+            $("#complaint-form").validate({
                 rules: {
-                    name: {
+                    date: {
                         required: true,
-                        minlength: 3
                     },
-                    address: {
+                    time: {
                         required: true,
-                        minlength: 10
                     },
-                    pincode: {
-                        required: true,
-                        digits: true,
-                        minlength: 6,
-                        maxlength: 6
-                    },
-                    phone_no: {
-                        required: true,
-                        digits: true,
-                        minlength: 10,
-                        maxlength: 10
-                    },
-                    city_id: {
+                    sales_entry_id: {
                         required: true
                     },
-                    state_id: {
+                    party_id: {
                         required: true
                     },
-                    area_id: {
+                    product_id: {
                         required: true
                     },
-                    gst_no: {
-                        required: true,
-                        minlength: 15,
-                        maxlength: 15
-                    },
-                    contact_person_id: {
+                    complaint_type_id: {
                         required: true
                     },
-                    owner_id: {
+                    service_type_id: {
                         required: true
-                    }
+                    },
+                    status_id: {
+                        required: true
+                    },
                 },
                 messages: {
-                    name: {
-                        required: "Please enter the party name",
-                        minlength: "The party name must be at least 3 characters long"
+                    date: {
+                        required: "Please enter the date",
+                        date: "Please enter a valid date"
                     },
-                    address: {
-                        required: "Please enter the address",
-                        minlength: "The address must be at least 10 characters long"
+                    time: {
+                        required: "Please enter the time",
+                        time: "Please enter a valid time"
                     },
-                    pincode: {
-                        required: "Please enter the pincode",
-                        digits: "The pincode must be numeric",
-                        minlength: "The pincode must be 6 digits long",
-                        maxlength: "The pincode must be 6 digits long"
+                    sales_entry_id: {
+                        required: "Please select a complain number"
                     },
-                    phone_no: {
-                        required: "Please enter the mobile number",
-                        digits: "The mobile number must be numeric",
-                        minlength: "The mobile number must be 10 digits long",
-                        maxlength: "The mobile number must be 10 digits long"
+                    party_id: {
+                        required: "Please select a party name"
                     },
-                    city_id: {
-                        required: "Please select a city"
+                    product_id: {
+                        required: "Please select a product"
                     },
-                    state_id: {
-                        required: "Please select a state"
+                    complaint_type_id: {
+                        required: "Please select a complaint type"
                     },
-                    area_id: {
-                        required: "Please select an area"
+                    service_type_id: {
+                        required: "Please select a service type"
                     },
-                    gst_no: {
-                        required: "Please enter the GST number",
-                        minlength: "The GST number must be 15 characters long",
-                        maxlength: "The GST number must be 15 characters long"
+                    status_id: {
+                        required: "Please select a status"
                     },
-                    contact_person_id: {
-                        required: "Please select a contact person"
-                    },
-                    owner_id: {
-                        required: "Please select an owner"
-                    }
                 },
                 errorElement: 'div',
                 errorPlacement: function(error, element) {

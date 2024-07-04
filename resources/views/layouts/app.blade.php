@@ -6,15 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>@yield('title' , config('app.name', 'Laravel'))</title>
+        <title>@yield('title', config('app.name', 'Laravel'))</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="icon" href="{{ asset('images/brand-logos/favicon.png') }}" type="image/x-icon">
 
-        <!-- Choices JS -->
-        <script src="{{ asset('libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+
 
         <!-- Main Theme Js -->
         <script src="{{ asset('js/main.js') }}"></script>
@@ -41,12 +40,12 @@
         <!-- Choices Css -->
         <link rel="stylesheet" href="{{ asset('libs/choices.js/public/assets/styles/choices.min.css') }}">
 
-
+        <link rel="stylesheet" href="{{ asset('libs/prismjs/themes/prism-coy.min.css') }}">
 
         @yield('css')
         <!-- Scripts -->
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
-        
+
     </head>
 
     <body>
@@ -527,7 +526,7 @@
         </div>
         <div class="page">
             <div id="loader">
-                <img src="{{asset('images/media/loader.svg')}}" alt="">
+                <img src="{{ asset('images/media/loader.svg') }}" alt="">
             </div>
             @include('layouts.header')
             @include('layouts.sidebar')
@@ -710,7 +709,7 @@
                                     <div class="list-group-item d-flex align-items-center ">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/13.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/13.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -721,7 +720,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/12.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/12.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -732,7 +731,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/11.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/11.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -743,7 +742,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/10.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/10.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -754,7 +753,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/19.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/19.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -765,7 +764,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/8.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/8.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -776,7 +775,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-lg me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/7.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/7.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-3">
@@ -791,7 +790,7 @@
                                     <div class="list-group-item d-flex align-items-center ">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/13.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/13.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -809,7 +808,7 @@
                                     <div class="list-group-item d-flex align-items-center border-top">
                                         <div>
                                             <span class="avatar avatar-md me-2 online avatar-rounded">
-                                                <img src="{{asset('images/faces/3.jpg')}}" alt="img">
+                                                <img src="{{ asset('images/faces/3.jpg') }}" alt="img">
                                             </span>
                                         </div>
                                         <div class="ms-2">
@@ -1016,7 +1015,7 @@
             <i class="ri-arrow-up-s-fill fs-20"></i>
         </div>
         <div id="responsive-overlay"></div>
-       
+
         <script src="{{ asset('libs/@popperjs/core/umd/popper.min.js') }}"></script>
 
         <!-- Bootstrap JS -->
@@ -1024,6 +1023,9 @@
 
         <!-- Defaultmenu JS -->
         <script src="{{ asset('js/defaultmenu.min.js') }}"></script>
+
+        <!-- Choices JS -->
+        <script src="{{ asset('libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 
         <!-- Node Waves JS-->
         <script src="{{ asset('libs/node-waves/waves.min.js') }}"></script>
@@ -1049,9 +1051,15 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
         <!-- Custom-Switcher JS -->
         <script src="{{ asset('js/custom-switcher.min.js') }}"></script>
+        <script src="{{ asset('libs/prismjs/prism.js') }}"></script>
+        <script src="{{ asset('js/prism-custom.j') }}s"></script>
+
+        <!-- Custom JS -->
+        <script src="{{ asset('js/custom.js') }}"></script>
 
         <script type="text/javascript">
             $(document).ready(function() {
