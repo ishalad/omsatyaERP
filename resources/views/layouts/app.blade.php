@@ -45,7 +45,8 @@
 
         @yield('css')
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+        
     </head>
 
     <body>
@@ -1015,7 +1016,7 @@
             <i class="ri-arrow-up-s-fill fs-20"></i>
         </div>
         <div id="responsive-overlay"></div>
-        @yield('scripts')
+       
         <script src="{{ asset('libs/@popperjs/core/umd/popper.min.js') }}"></script>
 
         <!-- Bootstrap JS -->
@@ -1047,12 +1048,42 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <!-- Custom-Switcher JS -->
         <script src="{{ asset('js/custom-switcher.min.js') }}"></script>
 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#logout-user').on('click', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, Logout!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "{{ route('logout') }}",
+                                type: "POST",
+                                data: {
+                                    _token: '{{ csrf_token() }}'
+                                },
+                                success: function() {
+                                    window.location.href = "{{ route('login') }}";
+                                }
+                            })
+                        }
+                    })
+                });
+            });
+        </script>
         <!-- Custom JS -->
-       
+        @yield('scripts')
     </body>
 
 </html>

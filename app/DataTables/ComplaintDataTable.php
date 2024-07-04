@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\MachineSalesEntry;
+use App\Models\Complaint;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class MachineSalesEntryDataTable extends DataTable
+class ComplaintDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,18 +22,16 @@ class MachineSalesEntryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function (MachineSalesEntry $machineSalesEntry) {
-                return  "<div class='btn-group'><a class='btn btn-sm btn-primary' href='" . route('MachineSales.edit', $machineSalesEntry) . "'><i class='fa fa-edit'></i></a> <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $machineSalesEntry->id . ")'><i class='fa fa-trash'></i></a></div>";
-            })
+            ->addColumn('action', 'complaint.action')
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(MachineSalesEntry $model): QueryBuilder
+    public function query(Complaint $model): QueryBuilder
     {
-        return $model->newQuery()->with('party', 'product', 'serviceType')->orderBy('created_at', 'desc');
+        return $model->newQuery();
     }
 
     /**
@@ -42,7 +40,7 @@ class MachineSalesEntryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('machinesalesentry-table')
+                    ->setTableId('complaint-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -69,15 +67,10 @@ class MachineSalesEntryDataTable extends DataTable
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('bill_no'),
-            Column::make('date'),
-            Column::make('order_no'),
-            Column::make('mc_no'),
-            Column::make('party.name'),
-            Column::make('product.name'),
-            Column::make('install_date'),
-            Column::make('service_expiry_date'),
-            Column::make('service_type.name'),
+            Column::make('id'),
+            Column::make('add your columns'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
         ];
     }
 
@@ -86,6 +79,6 @@ class MachineSalesEntryDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'MachineSalesEntry_' . date('YmdHis');
+        return 'Complaint_' . date('YmdHis');
     }
 }

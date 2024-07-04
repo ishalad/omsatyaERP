@@ -592,22 +592,22 @@
                                 <img alt="" src="/images/faces/9.jpg" class="avatar avatar-md">
                             </div>
                             <div class="ms-2 my-auto text-white">
-                                <h6 class="mb-0 text-fixed-white">Petey Cruiser</h6>
-                                <span class=" text-fixed-white op-7 fs-13">Premium Member</span>
+                                <h6 class="mb-0 text-fixed-white">{{ Auth::user()->name }}r</h6>
+                                <span class=" text-fixed-white op-7 fs-13">({{ Auth::user()->email }})</span>
                             </div>
                         </div>
                     </div>
-                    <a class="dropdown-item d-flex" href="profile.html"><i
-                            class="bx bx-user-circle fs-18  me-2"></i>Profile</a>
-                    <a class="dropdown-item d-flex" href="editprofile.html"><i
+                    {{-- <a class="dropdown-item d-flex" href="profile.html"><i
+                            class="bx bx-user-circle fs-18  me-2"></i>Profile</a> --}}
+                    <a class="dropdown-item d-flex" href="{{ route('profile.edit') }}"><i
                             class="bx bx-cog  fs-18  me-2"></i> Edit Profile</a>
-                    <a class="dropdown-item d-flex" href="email.html"><i
+                    {{-- <a class="dropdown-item d-flex" href="email.html"><i
                             class="bx bxs-inbox  fs-18  me-2"></i>Inbox</a>
                     <a class="dropdown-item d-flex" href="chat.html"><i
                             class="bx bx-envelope  fs-18  me-2"></i>Messages</a>
                     <a class="dropdown-item d-flex" href="settings.html"><i
-                            class="bx bx-slider-alt  fs-18  me-2"></i> Account Settings</a>
-                    <a class="dropdown-item d-flex" href="signin.html"><i
+                            class="bx bx-slider-alt  fs-18  me-2"></i> Account Settings</a> --}}
+                    <a class="dropdown-item d-flex logout-user"  id="logout-user" href="javascript:void(0);"><i
                             class="bx bx-log-out  fs-18  me-2"></i>Sign Out</a>
                 </div>
             </div>
@@ -621,3 +621,4 @@
     </div>
     <!-- End::main-header-container -->
 </header>
+

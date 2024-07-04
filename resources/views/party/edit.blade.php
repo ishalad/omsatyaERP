@@ -51,7 +51,7 @@
                         </div> --}}
     
                         <div class="row mb-2">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <label for="inputName" class="col-form-label">Party Name</label>
                                 <input type="text" id="inputName" class="form-control"
                                     aria-describedby="nameHelpInline" name="name" value="{{ $party->name ?? old('name') }}">
@@ -64,26 +64,26 @@
                         </div>
     
                         <div class="row mb-2">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <label for="input-textarea" class="col-form-label">Address</label>
                                 <textarea type="text" class="form-control" id="input-textarea"
                                     placeholder="Address..." name="address">{{ $party->address ?? old('address')}}</textarea>
                             </div>
                         </div>
                         <div class="row mb-2">
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                             <label for="inputName" class="col-form-label">Pincode</label>
                             <input type="number"  class="form-control" maxlength="6"
                                 aria-describedby="nameHelpInline" name="pincode" value="{{ $party->pincode ?? old('pincode') }}">
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                        <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                             <label for="inputshort" class="col-form-label">Mobile no.</label>
                             <input type="tel" id="inputshort" class="form-control"
                                 aria-describedby="nameHelpInline" name="phone_no" value="{{ $party->phone_no ?? old('phone_no') }}">
                         </div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputshort" class="col-form-label">City</label>
                                 <select class="form-control" data-trigger 
                                     id="city" name="city_id">
@@ -93,7 +93,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputState" class="col-form-label">State</label>
                                 <select class="form-control" data-trigger 
                                     id="state" name="state_id">
@@ -107,7 +107,7 @@
                         </div>
                         
                         <div class="row mb-2">
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputArea" class="col-form-label">Area</label>
                                 <select class="form-control" data-trigger 
                                     id="area" name="area_id">
@@ -119,7 +119,7 @@
                             </div>
                            
     
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputGst" class="col-form-label">Gst no.</label>
                                 <input type="text" id="inputGst" class="form-control"
                                     aria-describedby="nameHelpInline" name="gst_no" value="{{ $party->gst_no ?? old('gst_no') }}">
@@ -129,7 +129,7 @@
                         <div class="row mb-2">
     
     
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputPan" class="col-form-label">Cont.Person</label>
                                 <select class="form-control" data-trigger 
                                 id="contact_person_id" name="contact_person_id">
@@ -139,7 +139,7 @@
                                     @endforeach
                             </select>
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                            <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                 <label for="inputOwner" class="col-form-label">Owner Name</label>
                                 <select class="form-control" data-trigger 
                                 id="owner_id" name="owner_id">
@@ -196,10 +196,109 @@
 </div>
 @endSection
 @section('scripts')
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+{{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script> --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 <script type="text/javascript">
-
+    $(document).ready(function () {
+        $('#party-form').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 3
+                },
+                address: {
+                    required: true,
+                    minlength: 10
+                },
+                pincode: {
+                    required: true,
+                    digits: true,
+                    minlength: 6,
+                    maxlength: 6
+                },
+                phone_no: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+                city_id: {
+                    required: true
+                },
+                state_id: {
+                    required: true
+                },
+                area_id: {
+                    required: true
+                },
+                gst_no: {
+                    required: true,
+                    minlength: 15,
+                    maxlength: 15
+                },
+                contact_person_id: {
+                    required: true
+                },
+                owner_id: {
+                    required: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "Please enter the party name",
+                    minlength: "The party name must be at least 3 characters long"
+                },
+                address: {
+                    required: "Please enter the address",
+                    minlength: "The address must be at least 10 characters long"
+                },
+                pincode: {
+                    required: "Please enter the pincode",
+                    digits: "The pincode must be numeric",
+                    minlength: "The pincode must be 6 digits long",
+                    maxlength: "The pincode must be 6 digits long"
+                },
+                phone_no: {
+                    required: "Please enter the mobile number",
+                    digits: "The mobile number must be numeric",
+                    minlength: "The mobile number must be 10 digits long",
+                    maxlength: "The mobile number must be 10 digits long"
+                },
+                city_id: {
+                    required: "Please select a city"
+                },
+                state_id: {
+                    required: "Please select a state"
+                },
+                area_id: {
+                    required: "Please select an area"
+                },
+                gst_no: {
+                    required: "Please enter the GST number",
+                    minlength: "The GST number must be 15 characters long",
+                    maxlength: "The GST number must be 15 characters long"
+                },
+                contact_person_id: {
+                    required: "Please select a contact person"
+                },
+                owner_id: {
+                    required: "Please select an owner"
+                }
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
 
 </script>
 

@@ -23,7 +23,7 @@
             </div>
             <ul class="main-menu mt-5">
                 <li class="slide">
-                    <a href="{{route('dashboard')}}" class="side-menu__item">
+                    <a href="{{route('dashboard')}}" class="side-menu__item @if(request()->routeIs('dashboard')) active @endif">
                         <i class="bx bx-desktop side-menu__icon"></i>
                         <span class="side-menu__label">Dashboard</span>
                     </a>
@@ -35,7 +35,7 @@
                     </a>
                 </li> --}}
                 <li class="slide">
-                    <a href="{{route('parties.index')}}" class="side-menu__item">
+                    <a href="{{route('parties.index')}}" class="side-menu__item @if(request()->routeIs('parties.index') || request()->routeIs('parties.create') || request()->routeIs('parties.edit')) active @endif">
                         <i class="bx bxs-user-account side-menu__icon"></i>
                         <span class="side-menu__label">Party master</span>
                     </a>
@@ -49,23 +49,23 @@
                 </li> --}}
 
                 <li class="slide">
-                    <a href="{{route('machine-sales.index')}}" class="side-menu__item">
+                    <a href="{{route('MachineSales.index')}}" class="side-menu__item @if(request()->routeIs('MachineSales.index') || request()->routeIs('MachineSales.create') || request()->routeIs('MachineSales.edit')) active @endif">
                         <i class="bx bx-cart side-menu__icon"></i>
                         <span class="side-menu__label">Machines Sells</span>
                     </a>
                 </li>
 
-                <li class="slide">
+                {{-- <li class="slide">
                     <a href="#" class="side-menu__item">
                         <i class="bx bxs-report side-menu__icon"></i>
                         <span class="side-menu__label">Report</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="slide">
-                    <a href="add-complain.html" class="side-menu__item">
+                    <a href="{{route('complaints.index')}}" class="side-menu__item @if(request()->routeIs('complaints.index') || request()->routeIs('complaints.create') || request()->routeIs('complaints.edit')) active @endif">
                         <i class="bx bx-error-alt side-menu__icon"></i>
-                        <span class="side-menu__label">Complain</span>
+                        <span class="side-menu__label">Complaints</span>
                     </a>
                 </li>
 
@@ -76,7 +76,7 @@
                     </a>
                 </li>
 
-                <li class="slide">
+                {{-- <li class="slide">
                     <a href="area.html" class="side-menu__item">
                         <i class="bx bx-area side-menu__icon"></i>
                         <span class="side-menu__label">Area</span>
@@ -105,7 +105,7 @@
                         </li>
 
                     </ul>
-                </li>
+                </li> --}}
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                     width="24" height="24" viewBox="0 0 24 24">

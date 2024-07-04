@@ -46,9 +46,13 @@ pre {
     min-height: calc(100vh - 7.5rem);
     margin-block-end: 0;
     margin-block-start: 3.75rem;
-    margin-inline-start: 8rem;
+    margin-inline-start: 15rem;
     transition: all .05s ease;
-  }
+    -webkit-transition: all .05s ease;
+    -moz-transition: all .05s ease;
+    -ms-transition: all .05s ease;
+    -o-transition: all .05s ease;
+}
 }
 
 .main-content {
@@ -97,6 +101,10 @@ pre {
 /* Start::Carousel */
 .carousel-inner {
   border-radius: 0.35rem;
+  -webkit-border-radius: 0.35rem;
+  -moz-border-radius: 0.35rem;
+  -ms-border-radius: 0.35rem;
+  -o-border-radius: 0.35rem;
 }
 
 .carousel-caption {
@@ -111,6 +119,10 @@ pre {
   max-width: 100px;
   border: 1px solid $default-border;
   border-radius: $default-radius;
+  -webkit-border-radius: $default-radius;
+  -moz-border-radius: $default-radius;
+  -ms-border-radius: $default-radius;
+  -o-border-radius: $default-radius;
 }
 .carousel-slider .carousel-item img {
   max-width: 100%;
@@ -156,6 +168,10 @@ pre {
   background-color: $primary-01;
   border: $default-border;
   border-radius: $default-radius;
+  -webkit-border-radius: $default-radius;
+  -moz-border-radius: $default-radius;
+  -ms-border-radius: $default-radius;
+  -o-border-radius: $default-radius;
 }
 
 @media (min-width: 768px) {
@@ -2682,4 +2698,18 @@ ul {
 .flatpickr-input.bg-primary.form-control::placeholder{
   color: #fff;
   opacity: 1;
+}
+
+
+// ==============new===29/06/24=====csss=========
+
+.form-control{
+  font-size: 13px !important;
+  height: 35px !important;
+  padding: 5px 10px !important;
+
+}
+
+.table thead.table-secondary{
+  background-color: gray !important;
 }

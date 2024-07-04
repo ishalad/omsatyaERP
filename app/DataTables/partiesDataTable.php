@@ -24,7 +24,6 @@ class partiesDataTable extends DataTable
 
         return (new EloquentDataTable($query))
             ->addColumn('action', function (party $party) {
-                // dump($party);
                 return "<div class='btn-group'><a class='btn btn-sm btn-primary' href='" . route('parties.edit', ['party' => $party]) . "'><i class='fa fa-edit'></i></a> <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $party->id . ")'><i class='fa fa-trash'></i></a></div>";
             })
             ->setRowId('id');

@@ -8536,7 +8536,7 @@ caption {
 }
 .table th,
 .table td {
-  padding: 0.75rem;
+  padding: 5px 10px !important;
   vertical-align: middle;
   line-height: 1.462;
   font-size: 0.813rem;
@@ -8834,7 +8834,7 @@ caption {
   border-color: var(--bs-table-border-color);
 }
 .table thead.table-secondary {
-  background-color: #fff;
+  background-color: gary !important;
   color: var(--bs-table-color);
   --bs-table-color: #000;
   --bs-table-bg: rgba(var(--secondary-rgb), 0.1);
@@ -22350,5 +22350,16 @@ a:hover {
 }
 
 .fw-semibold {
+  font-weight: 500 !important;
+}
+
+
+/* ===29/06/24==add===new===css=== */
+
+.form-control{
+  height: 35px !important;
+}
+
+.col-form-label{
   font-weight: 500 !important;
 }

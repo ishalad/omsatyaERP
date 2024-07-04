@@ -14,24 +14,28 @@ return new class extends Migration
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('firm_id'); 
-            $table->unsignedBigInteger('year_id'); 
-            $table->date('date'); 
-            $table->time('time'); 
-            $table->unsignedBigInteger('complaint_type_id'); 
-            $table->unsignedBigInteger('sales_entry_id'); 
-            $table->unsignedBigInteger('product_id'); 
-            $table->string('remarks', 255); 
-            $table->string('image', 255); 
-            $table->unsignedBigInteger('engineer_id')->nullable(); 
-            $table->date('engineer_assign_date')->nullable(); 
-            $table->time('engineer_assign_time')->nullable(); 
-            $table->unsignedBigInteger('engineer_complaint_id'); 
-            $table->string('jointengg', 15)->nullable(); 
-            $table->unsignedBigInteger('service_type_id'); 
-            $table->unsignedBigInteger('status_id'); 
-            $table->string('complaint', 255); 
-            $table->timestamps(); 
+            $table->unsignedBigInteger('firm_id');
+            $table->unsignedBigInteger('year_id');
+            $table->date('date');
+            $table->time('time');
+            $table->unsignedBigInteger('complaint_type_id');
+            $table->unsignedBigInteger('sales_entry_id');
+            $table->unsignedBigInteger('product_id');
+            $table->string('remarks', 255);
+            $table->string('image', 255);
+            $table->unsignedBigInteger('engineer_id')->nullable();
+            $table->date('engineer_assign_date')->nullable();
+            $table->time('engineer_assign_time')->nullable();
+            $table->time('engineer_in_time')->nullable();
+            $table->time('engineer_out_time')->nullable();
+            $table->date('engineer_in_date')->nullable();
+            $table->date('engineer_out_date')->nullable();
+            $table->unsignedBigInteger('engineer_complaint_id');
+            $table->string('jointengg', 15)->nullable();
+            $table->unsignedBigInteger('service_type_id');
+            $table->unsignedBigInteger('status_id');
+            $table->string('complaint', 255);
+            $table->timestamps();
 
             // Define foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

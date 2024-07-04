@@ -27,8 +27,8 @@ caption {
   color: $text-muted;
 }
 @mixin tablehead($color-bg) {
-  background-color: $white;
-  color: var(--bs-table-color);
+  // background-color: $gray-5 !important;
+  // color: var(--bs-table-color);
   --bs-table-color: #{$black};
   --bs-table-bg: rgba(#{$color-bg}, 0.1);
   --bs-table-border-color: rgba(#{$color-bg}, 0.1);
@@ -66,7 +66,7 @@ caption {
   }
   th,
   td {
-    padding: 0.75rem;
+    padding: 5px 10px !important;
     vertical-align: middle;
     line-height: 1.462;
     font-size: 0.813rem;
