@@ -49,7 +49,7 @@
                             </div>
                         @endif
                         <form action="{{ route('machine-sales.update', ['id' => $machine->id]) }}" method="POST"
-                            id="machine-sales-form">
+                            id="machine-sales-form" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" class="form-control" placeholder="Firm Id"
                                 value="{{ $machine->firm_id ?? App\Models\Firm::first()->id }}" name="firm_id">
@@ -57,12 +57,13 @@
                                 value="{{ $machine->year_id ?? App\Models\Year::first()->id }}" name="year_id">
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputBill" class="col-form-label">Bill No.</label>
+                                    <label for="inputBill" class="col-form-label">Bill No.</label> <i
+                                        class="text-danger">*</i>
                                     <input type="text" id="inputBill" class="form-control" name="bill_no"
                                         value="{{ $machine->bill_no ?? old('bill_no') }}" />
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="input-Date" class="form-label">Date</label>
+                                    <label for="input-Date" class="form-label">Date</label> <i class="text-danger">*</i>
                                     <input type="date" class="form-control " placeholder="yy/mm/dd" name="date"
                                         value="{{ $machine->date ?? old('date') }}">
                                 </div>
@@ -70,31 +71,34 @@
 
                             <div class="row mb-1">
                                 <!-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                        <label for="inputParty" class="col-form-label">Party Name</label>
-                                        <input type="text" id="inputParty" class="form-control" />
-                                    </div> -->
+                                                                                    <label for="inputParty" class="col-form-label">Party Name</label>
+                                                                                    <input type="text" id="inputParty" class="form-control" />
+                                                                                </div> -->
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputParty" class="col-form-label">Party Name</label>
-                                    <select class="form-control" data-trigger name="party_id">
+                                    <label for="inputParty" class="col-form-label">Party Name</label> <i
+                                        class="text-danger">*</i>
+                                    <select class="form-control" name="party_id" id="party_id">
                                         <option value="">Choose a Party Name</option>
                                         @foreach (App\Models\Party::all() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if ($machine->party_id == $item->id || old('party_id') == $item->id) selected @endif>{{ $item->name }}
+                                                @if ($machine->party_id == $item->id || old('party_id') == $item->id) selected @endif
+                                                data-value={{ json_encode($item) }}>{{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <!-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                        <label for="inputProduct" class="col-form-label">Product</label>
-                                        <input type="text" id="inputProduct" class="form-control" />
-                                    </div> -->
+                                                                                    <label for="inputProduct" class="col-form-label">Product</label>
+                                                                                    <input type="text" id="inputProduct" class="form-control" />
+                                                                                </div> -->
 
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputParty" class="col-form-label">Product Name</label>
-                                    <select class="form-control" data-trigger name="product_id">
+                                    <label for="inputParty" class="col-form-label">Product Name</label> <i
+                                        class="text-danger">*</i>
+                                    <select class="form-control" name="product_id" id="product_id">
                                         <option value="">Choose a Product</option>
                                         @foreach (App\Models\Product::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -107,12 +111,14 @@
                             </div>
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputProdsr" class="col-form-label">Order No.</label>
-                                    <input type="text" id="inputProdsr" class="form-control" name="order_no"
-                                        value="{{ $machine->order_no ?? old('order_no') }}" />
+                                    <label for="inputProdsr" class="col-form-label">Serial No.</label> <i
+                                        class="text-danger">*</i>
+                                    <input type="text" id="inputProdsr" class="form-control" name="serial_no"
+                                        value="{{ $machine->serial_no ?? old('serial_no') }}" />
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputM/C" class="col-form-label">M/c No.</label>
+                                    <label for="inputM/C" class="col-form-label">M/c No.</label> <i
+                                        class="text-danger">*</i>
                                     <input type="text" id="inputM/C" class="form-control" name="mc_no"
                                         value="{{ $machine->mc_no ?? old('mc_no') }}" />
                                 </div>
@@ -121,13 +127,15 @@
                             <div class="row mb-1">
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputExpiry" class="col-form-label">Install Date</label>
+                                    <label for="inputExpiry" class="col-form-label">Install Date</label> <i
+                                        class="text-danger">*</i>
                                     <input type="date" class="form-control " placeholder="yy/mm/dd"
                                         name="install_date" value="{{ $machine->install_date ?? old('install_date') }}">
                                 </div>
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputExpiry" class="col-form-label">Expiry Date</label>
+                                    <label for="inputExpiry" class="col-form-label">Expiry Date</label> <i
+                                        class="text-danger">*</i>
                                     <input type="date" class="form-control " placeholder="yy/mm/dd"
                                         name="service_expiry_date"
                                         value="{{ $machine->service_expiry_date ?? old('service_expiry_date') }}">
@@ -138,8 +146,14 @@
 
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputParty" class="col-form-label">Service Type</label>
-                                    <select class="form-control" data-trigger name="service_type_id">
+                                    <label for="inputParty" class="col-form-label">Free Service</label>
+                                    <input type="number" name="free_service" id="free_service" class="form-control"
+                                        value="{{ $machine->free_service ?? old('free_service') }}">
+                                </div>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputParty" class="col-form-label">Service Type</label> <i
+                                        class="text-danger">*</i>
+                                    <select class="form-control" name="service_type_id" id="service_type_id">
                                         name="service_type_id">
                                         <option value="">Choose a Service Type</option>
                                         @foreach (App\Models\ServiceType::all() as $item)
@@ -150,27 +164,19 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputParty" class="col-form-label">Free Service</label>
-                                    <select class="form-control" data-trigger name="free_service">
-                                        <option value="">Choose a Free Service</option>
-                                        <option value="1" @if ($machine->free_service == 1 || old('free_service') == 1) selected @endif>1</option>
-                                        <option value="2" @if ($machine->free_service == 2 || old('free_service') == 2) selected @endif>2</option>
-                                        <option value="3" @if ($machine->free_service == 3 || old('free_service') == 3) selected @endif>3</option>
-                                    </select>
-                                </div>
 
                             </div>
 
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputOrder" class="col-form-label">Order No.</label>
+                                    <label for="inputOrder" class="col-form-label">Order No.</label> <i
+                                        class="text-danger">*</i>
                                     <input type="text" id="inputOrder" class="form-control" name="order_no"
                                         value="{{ $machine->order_no ?? old('order_no') }}" />
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputOrder" class="col-form-label">Remark </label>
-                                    <input type="text" id="inputOrder" class="form-control" name="remark"
+                                    <input type="text" id="inputOrder" class="form-control" name="remarks"
                                         value="{{ $machine->remark ?? old('remark') }}" />
                                 </div>
                             </div>
@@ -178,7 +184,8 @@
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Fitting Engg.</label>
-                                    <select class="form-control" data-trigger name="mic_fitting_engineer_id"
+                                    <select class="form-control" name="mic_fitting_engineer_id"
+                                        id="mic_fitting_engineer_id"
                                         value="{{ $machine->mic_fitting_engineer_id ?? old('mic_fitting_engineer_id') }}">
                                         <option value="">Choose a Fitting Engg.</option>
                                         @foreach (App\Models\Engineer::all() as $item)
@@ -191,7 +198,7 @@
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Delv. Person</label>
-                                    <select class="form-control" data-trigger name="delivery_engineer_id"
+                                    <select class="form-control" name="delivery_engineer_id" id="delivery_engineer_id"
                                         value="{{ $machine->delivery_engineer_id ?? old('delivery_engineer_id') }}">
                                         <option value="">Choose a Delv. Person</option>
                                         @foreach (App\Models\Engineer::all() as $item)
@@ -220,14 +227,14 @@
 
                             <div class="row mb-1">
                                 <!-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                        <label for="inputTag" class="col-form-label">Tag</label>
-                                        <input type="text" id="inputTag" class="form-control" />
-                                    </div> -->
+                                                                                    <label for="inputTag" class="col-form-label">Tag</label>
+                                                                                    <input type="text" id="inputTag" class="form-control" />
+                                                                                </div> -->
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputActive" class="col-form-label">Is Active</label>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="switch-sm"
-                                            name="is_active" @if ($machine->is_active == 1) checked @endif
+                                        <input class="form-check-input" type="checkbox" id="switch-sm" name="is_active"
+                                            @if ($machine->is_active == 1) checked @endif
                                             value ="{{ $machine->is_active ?? old('is_active') }}">
                                         <label class="form-check-label" for="switch-sm">Default</label>
                                     </div>
@@ -271,113 +278,126 @@
     {{-- {!! JsValidator::formRequest('App\Http\Requests\MachineSalesEntryRequest', '#machine-sales-form'); !!} --}}
     {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> --}}
     <script type="text/javascript">
-        $('#MachineSales-form').validate({
-            rules: {
-                bill_no: {
-                    required: true
+        $(document).ready(function() {
+            $('#party_id').select2();
+
+            $('#product_id').select2();
+
+            $('#service_type_id').select2();
+
+            $('#mic_fitting_engineer_id').select2();
+
+            $('#delivery_engineer_id').select2();
+
+            $('#MachineSales-form').validate({
+                rules: {
+                    bill_no: {
+                        required: true,
+                        maxlength: 8
+                    },
+                    date: {
+                        required: true,
+                        date: true
+                    },
+                    party_id: {
+                        required: true
+                    },
+                    product_id: {
+                        required: true
+                    },
+                    order_no: {
+                        required: true
+                    },
+                    mc_no: {
+                        required: true
+                    },
+                    install_date: {
+                        required: true,
+                        date: true
+                    },
+                    service_expiry_date: {
+                        required: true,
+                        date: true
+                    },
+                    service_type_id: {
+                        required: true
+                    },
+                    free_service: {
+                        required: true
+                    },
+                    remark: {
+                        required: true
+                    },
+                    mic_fitting_engineer_id: {
+                        required: true
+                    },
+                    delivery_engineer_id: {
+                        required: true
+                    },
+                    map_url: {
+                        required: true
+                    }
                 },
-                date: {
-                    required: true,
-                    date: true
+                messages: {
+                    bill_no: {
+                        required: "Please enter the bill number"
+                    },
+                    date: {
+                        required: "Please enter the date",
+                        date: "Please enter a valid date"
+                    },
+                    party_id: {
+                        required: "Please select a party"
+                    },
+                    product_id: {
+                        required: "Please select a product"
+                    },
+                    order_no: {
+                        required: "Please enter the order number"
+                    },
+                    mc_no: {
+                        required: "Please enter the machine number"
+                    },
+                    install_date: {
+                        required: "Please enter the installation date",
+                        date: "Please enter a valid date"
+                    },
+                    service_expiry_date: {
+                        required: "Please enter the service expiry date",
+                        date: "Please enter a valid date"
+                    },
+                    service_type_id: {
+                        required: "Please select a service type"
+                    },
+                    free_service: {
+                        required: "Please select a free service option"
+                    },
+                    remark: {
+                        required: "Please enter a remark"
+                    },
+                    mic_fitting_engineer_id: {
+                        required: "Please select a fitting engineer"
+                    },
+                    delivery_engineer_id: {
+                        required: "Please select a delivery engineer"
+                    },
+                    map_url: {
+                        required: "Please enter the map location URL"
+                    }
                 },
-                party_id: {
-                    required: true
+                errorElement: 'div',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
                 },
-                product_id: {
-                    required: true
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
                 },
-                order_no: {
-                    required: true
-                },
-                mc_no: {
-                    required: true
-                },
-                install_date: {
-                    required: true,
-                    date: true
-                },
-                service_expiry_date: {
-                    required: true,
-                    date: true
-                },
-                service_type_id: {
-                    required: true
-                },
-                free_service: {
-                    required: true
-                },
-                remark: {
-                    required: true
-                },
-                mic_fitting_engineer_id: {
-                    required: true
-                },
-                delivery_engineer_id: {
-                    required: true
-                },
-                map_url: {
-                    required: true
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
                 }
-            },
-            messages: {
-                bill_no: {
-                    required: "Please enter the bill number"
-                },
-                date: {
-                    required: "Please enter the date",
-                    date: "Please enter a valid date"
-                },
-                party_id: {
-                    required: "Please select a party"
-                },
-                product_id: {
-                    required: "Please select a product"
-                },
-                order_no: {
-                    required: "Please enter the order number"
-                },
-                mc_no: {
-                    required: "Please enter the machine number"
-                },
-                install_date: {
-                    required: "Please enter the installation date",
-                    date: "Please enter a valid date"
-                },
-                service_expiry_date: {
-                    required: "Please enter the service expiry date",
-                    date: "Please enter a valid date"
-                },
-                service_type_id: {
-                    required: "Please select a service type"
-                },
-                free_service: {
-                    required: "Please select a free service option"
-                },
-                remark: {
-                    required: "Please enter a remark"
-                },
-                mic_fitting_engineer_id: {
-                    required: "Please select a fitting engineer"
-                },
-                delivery_engineer_id: {
-                    required: "Please select a delivery engineer"
-                },
-                map_url: {
-                    required: "Please enter the map location URL"
-                }
-            },
-            errorElement: 'div',
-            errorPlacement: function(error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function(element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function(element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
+            });
+        })
     </script>
 
 

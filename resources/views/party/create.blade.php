@@ -44,32 +44,51 @@
 
                         <div class="card-body gy-4">
                             <div class="form-group row mb-2">
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="inputName" class="col-form-label">Party Name</label>
+                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputName" class="col-form-label">Party Name</label> <i
+                                        class="text-danger">*</i>
                                     <input type="text" id="inputName" class="form-control" name="name"
                                         value="{{ old('name') }}">
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputName" class="col-form-label">Party Email</label>
+                                    <input type="text" id="inputName" class="form-control" name="email"
+                                        value="{{ old('email') }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-2">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-textarea" class="col-form-label">Address</label>
+                                    <label for="input-textarea" class="col-form-label">Address</label> <i
+                                        class="text-danger">*</i>
                                     <textarea type="text" class="form-control" id="input-textarea" name="address">{{ old('address') }}</textarea>
                                 </div>
                             </div>
 
                             <div class="row mb-2">
+
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputName" class="col-form-label">Pincode</label>
-                                    <input type="number" class="form-control" name="pincode" value="{{ old('pincode') }}">
+                                    <label for="area" class="col-form-label">Area</label><i class="text-danger">*</i>
+                                    <select class="form-control" id="area" name="area_id">
+                                        <option value="">Choose a Option</option>
+                                        @foreach (App\Models\Area::all() as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputshort" class="col-form-label">Mobile no.</label>
+                                    <label for="inputshort" class="col-form-label">Mobile no.</label> <i
+                                        class="text-danger">*</i>
                                     <input type="tel" id="inputshort" class="form-control" name="phone_no"
                                         value="{{ old('phone_no') }}">
                                 </div>
                             </div>
-
+                            <div class="row mb-2">
+                                <div class="form-group col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                                    <label for="other_phone_no" class="col-form-label">Other Phone No.</label>
+                                    <input type="tel" id="other_phone_no" class="form-control" name="other_phone_no">
+                                </div>
+                            </div>
                             <div class="row mb-2">
                                 <div class="form-group  col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="city" class="col-form-label">City</label>
@@ -77,7 +96,8 @@
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\City::all() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if (old('city_id') == $item->id) selected @endif>{{ $item->name }}
+                                                @if (old('city_id') == $item->id) selected @endif>
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -88,7 +108,8 @@
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\State::all() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if (old('state_id') == $item->id) selected @endif>{{ $item->name }}
+                                                @if (old('state_id') == $item->id) selected @endif>
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -97,16 +118,14 @@
 
                             <div class="row mb-2">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="area" class="col-form-label">Area</label>
-                                    <select class="form-control" id="area" name="area_id">
-                                        <option value="">Choose a Option</option>
-                                        @foreach (App\Models\Area::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label for="inputName" class="col-form-label">Pan number</label> <i
+                                        class="text-danger">*</i>
+                                    <input type="text" class="form-control" name="pan_no"
+                                        value="{{ old('pan_no') }}">
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputGst" class="col-form-label">Gst no.</label>
+                                    <label for="inputGst" class="col-form-label">Gst no.</label> <i
+                                        class="text-danger">*</i>
                                     <input type="text" id="inputGst" class="form-control" name="gst_no"
                                         value="{{ old('gst_no') }}">
                                 </div>
@@ -119,7 +138,8 @@
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\ContactPerson::all() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if (old('contact_person_id') == $item->id) selected @endif>{{ $item->name }}
+                                                @if (old('contact_person_id') == $item->id) selected @endif>
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -130,7 +150,8 @@
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\Owner::all() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if (old('owner_id') == $item->id) selected @endif>{{ $item->name }}
+                                                @if (old('owner_id') == $item->id) selected @endif>
+                                                {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -140,6 +161,10 @@
                             <div class="row mb-2">
                                 <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 mb-2">
                                     <div class="row justify-content-end mt-3">
+                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2 ">
+                                            <input type="reset" class="btn btn-outline-light w-100">
+                                            {{-- <button class="btn btn-outline-light w-100">Reset</button> --}}
+                                        </div>
                                         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mb-2">
                                             <button class="btn btn-primary w-100" type="submit">Submit</button>
                                         </div>
@@ -161,6 +186,26 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+
+            $('#city').select2({
+                placeholder: 'Select an option'
+            });
+            $('#state').select2({
+                placeholder: 'Select an option'
+            });
+
+            $('#contact_person_id').select2({
+                placeholder: 'Select an option'
+            });
+
+            $('#owner_id').select2({
+                placeholder: 'Select an option'
+            });
+
+            $('#area').select2({
+                placeholder: 'Select an option'
+            });
+
             $('#party-form').validate({
                 rules: {
                     name: {
@@ -171,23 +216,11 @@
                         required: true,
                         minlength: 10
                     },
-                    pincode: {
-                        required: true,
-                        digits: true,
-                        minlength: 6,
-                        maxlength: 6
-                    },
                     phone_no: {
                         required: true,
                         digits: true,
                         minlength: 10,
                         maxlength: 10
-                    },
-                    city_id: {
-                        required: true
-                    },
-                    state_id: {
-                        required: true
                     },
                     area_id: {
                         required: true
@@ -197,11 +230,10 @@
                         minlength: 15,
                         maxlength: 15
                     },
-                    contact_person_id: {
-                        required: true
-                    },
-                    owner_id: {
-                        required: true
+                    pan_no: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10
                     }
                 },
                 messages: {
@@ -213,23 +245,11 @@
                         required: "Please enter the address",
                         minlength: "The address must be at least 10 characters long"
                     },
-                    pincode: {
-                        required: "Please enter the pincode",
-                        digits: "The pincode must be numeric",
-                        minlength: "The pincode must be 6 digits long",
-                        maxlength: "The pincode must be 6 digits long"
-                    },
                     phone_no: {
                         required: "Please enter the mobile number",
                         digits: "The mobile number must be numeric",
                         minlength: "The mobile number must be 10 digits long",
                         maxlength: "The mobile number must be 10 digits long"
-                    },
-                    city_id: {
-                        required: "Please select a city"
-                    },
-                    state_id: {
-                        required: "Please select a state"
                     },
                     area_id: {
                         required: "Please select an area"
@@ -239,12 +259,6 @@
                         minlength: "The GST number must be 15 characters long",
                         maxlength: "The GST number must be 15 characters long"
                     },
-                    contact_person_id: {
-                        required: "Please select a contact person"
-                    },
-                    owner_id: {
-                        required: "Please select an owner"
-                    }
                 },
                 errorElement: 'div',
                 errorPlacement: function(error, element) {

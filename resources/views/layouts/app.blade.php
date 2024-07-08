@@ -41,7 +41,7 @@
         <link rel="stylesheet" href="{{ asset('libs/choices.js/public/assets/styles/choices.min.css') }}">
 
         <link rel="stylesheet" href="{{ asset('libs/prismjs/themes/prism-coy.min.css') }}">
-
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         @yield('css')
         <!-- Scripts -->
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
@@ -1045,9 +1045,6 @@
         <script src="{{ asset('js/date-range.js') }}"></script>
 
 
-
-
-
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -1057,6 +1054,7 @@
         <script src="{{ asset('js/custom-switcher.min.js') }}"></script>
         <script src="{{ asset('libs/prismjs/prism.js') }}"></script>
         <script src="{{ asset('js/prism-custom.j') }}s"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <!-- Custom JS -->
         <script src="{{ asset('js/custom.js') }}"></script>

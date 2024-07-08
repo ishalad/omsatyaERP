@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('parties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
+            $table->string('pan_no');
             $table->string('address');
             $table->unsignedBigInteger('city_id'); // Foreign key to cities
             $table->unsignedBigInteger('state_id'); // Foreign key to states
             $table->string('pincode');
             $table->string('phone_no');
+            $table->string('other_phone_no', 500);
             $table->string('gst_no');
             $table->unsignedBigInteger('contact_person_id'); // Foreign key to contact_persons
             $table->unsignedBigInteger('owner_id'); // Foreign key to owners
@@ -32,7 +35,7 @@ return new class extends Migration
             $table->foreign('firm_id')->references('id')->on('firms')->onDelete('cascade');
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
-            $table->foreign('contact_person_id')->references('id')->on('contacphp t_persons')->onDelete('cascade');
+            $table->foreign('contact_person_id')->references('id')->on('contact_persons')->onDelete('cascade');
         });
     }
 

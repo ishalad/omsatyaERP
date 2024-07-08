@@ -22,7 +22,17 @@ class ComplaintDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'complaint.action')
+            ->addIndexColumn()
+            ->addColumn('action', function (Complaint $complaint) {
+                return "<div class='btn-group'>
+                        <a class='btn btn-sm btn-primary' href='" . route('complaints.edit', ['complaint' => $complaint]) . "'><i class='fa fa-edit'></i></a>
+                        <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $complaint->id . ")'><i class='fa fa-trash'></i></a>
+                        <a class='btn btn-sm btn-info' href='javascript:void(0)' onclick='window.addItemPart(" . $complaint->id . ")'><i class='fa fa-product-hunt'></i></a>
+                    </div>";
+            })
+            ->addColumn("engineer_name", function (Complaint $complaint) {
+                return $complaint->engineer->name ?? ' N/A';
+            })
             ->setRowId('id');
     }
 
@@ -31,7 +41,7 @@ class ComplaintDataTable extends DataTable
      */
     public function query(Complaint $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('year', 'complaintType', 'salesEntry', 'product', 'engineer', 'serviceType', 'status');
     }
 
     /**
@@ -58,19 +68,30 @@ class ComplaintDataTable extends DataTable
 
     /**
      * Get the dataTable columns definition.
-     */
+     */ //sr_no, date, time, complaint_no, product, sr_no, machine_no, party_name, mobile_number, camplaint_type, service_type, status, engineer_name
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No.')
+                ->searchable(false)
+                ->orderable(false),
+            Column::make('date'),
+            Column::make('time'),
+            Column::make('complaint_no'),
+            Column::make('product.name'),
+            Column::make('sales_entry.mc_no')->title('Machine No'),
+            Column::make('sales_entry.party.name')->title('Party Name'),
+            Column::make('sales_entry.party.phone_no')->title('Party Mobile Number'),
+            Column::make('complaint_type.name'),
+            Column::make('service_type.name'),
+            Column::make('status.name'),
+            Column::make('engineer_name'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('date'),
-            Column::make('time'),
-            Column::make('year.name'),
-            Column::make('party.mame'),
         ];
     }
 

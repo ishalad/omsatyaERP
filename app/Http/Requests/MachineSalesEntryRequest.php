@@ -23,16 +23,16 @@ class MachineSalesEntryRequest extends FormRequest
     {
         return [
             "date" => "required|before_or_equal:today",
-            "bill_no" => "required|numeric|max_digits:10",
+            "bill_no" => "required|numeric",
             "party_id" => "required",
             "mc_no" => "required",
-            "person_no" => "required",
-            "install_date" => "required|before:today",
+            "serial_no" => "required|unique:machine_sales_entries", //sr_no
+            "install_date" => "required",
             "service_expiry_date" => "required",
-            "order_no" => "required",
-            "free_service" => "required|numeric|min:0|max:9",
+            "order_no" => "required|unique:machine_sales_entries",
+            "free_service" => "numeric|min:0|max:9",
             "service_type_id" => "required",
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'map_url' => "active_url",
             "mic_fitting_engineer_id" => "required",
             "delivery_engineer_id" => "required",

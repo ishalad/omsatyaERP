@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\party;
+use App\Models\Party;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class partiesDataTable extends DataTable
+class PartyDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -21,10 +21,16 @@ class partiesDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-
         return (new EloquentDataTable($query))
-            ->addColumn('action', function (party $party) {
-                return "<div class='btn-group'><a class='btn btn-sm btn-primary' href='" . route('parties.edit', ['party' => $party]) . "'><i class='fa fa-edit'></i></a> <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $party->id . ")'><i class='fa fa-trash'></i></a></div>";
+            ->addIndexColumn()
+            ->addColumn("contct_person", function (Party $party) {
+                return $party->contactPerson->name . " (" . $party->contactPerson->phone_no . ")";
+            })
+            ->addColumn("owner_name", function (Party $party) {
+                return $party->owner->name . " (" . $party->owner->phone_no . ")";
+            })
+            ->addColumn('action', function (Party $party) {
+                return  "<div class='btn-group'><a class='btn btn-sm btn-primary' href='" . route('parties.edit', $party) . "'><i class='fa fa-edit'></i></a> <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $party->id . ")'><i class='fa fa-trash'></i></a></div>";
             })
             ->setRowId('id');
     }
@@ -32,9 +38,9 @@ class partiesDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(party $model): QueryBuilder
+    public function query(Party $model): QueryBuilder
     {
-        return $model->newQuery()->with(['owner', 'city', 'state', 'area'])->orderBy('created_at', 'desc');
+        return $model->newQuery()->with('city', 'state', 'area', 'owner', 'contactPerson');
     }
 
     /**
@@ -43,7 +49,7 @@ class partiesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('parties-table')
+            ->setTableId('party-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -65,17 +71,24 @@ class partiesDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('DT_RowIndex')
+                ->title('No.')
+                ->searchable(false)
+                ->orderable(false),
+            Column::make('name'),
+            Column::make('address'),
+            Column::make('phone_no')
+                ->title('mobile No.'),
+            Column::make('city.name'),
+            Column::make('area.name'),
+            Column::make('contct_person'),
+            Column::make('owner_name'),
+            Column::make('id'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-            Column::make('name'),
-            Column::make('owner.name'),
-            Column::make('phone_no'),
-            Column::make('city.name'),
-            Column::make('state.name'),
-            Column::make('area.name'),
         ];
     }
 
@@ -84,6 +97,6 @@ class partiesDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'parties_' . date('YmdHis');
+        return 'Party_' . date('YmdHis');
     }
 }

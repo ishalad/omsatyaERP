@@ -23,10 +23,10 @@ class ComplaintRequest extends FormRequest
     {
         return [
             "date" => "required|date",
-            "time" => "required|date_format:H:i",
+            "time" => "required",
             "sales_entry_id" => "required",
             "party_id" => "required",
-            "product_id" => "required",
+            // "product_id" => "required",
             "complaint_type_id" => "required",
             "status_id" => "required",
             // "engineer_id" => "required",

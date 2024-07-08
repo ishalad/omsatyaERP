@@ -10,8 +10,8 @@ class Complaint extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'firm_id', 'year_id', 'date', 'time', 'complaint_type_id', 'sales_entry_id', 'product_id', 'remarks', 'image', 'engineer_id',
-        'engineer_assign_date', 'engineer_assign_time', 'engineer_complaint_id', 'jointengg', 'service_type_id', 'status_id', 'complaint'
+        'user_id', 'firm_id', 'year_id', 'party_id', 'date', 'time', 'complaint_type_id', 'sales_entry_id', 'product_id', 'remarks', 'image', 'engineer_id',
+        'engineer_assign_date', 'engineer_assign_time', 'engineer_complaint_id', 'jointengg', 'service_type_id', 'status_id', 'complaint_no'
     ];
 
     public function user()
@@ -31,12 +31,12 @@ class Complaint extends Model
 
     public function salesEntry()
     {
-        return $this->belongsTo(MachineSalesEntry::class, 'sales_entry_id');
+        return $this->belongsTo(MachineSalesEntry::class, 'sales_entry_id')->with('party');
     }
 
     public function complaintType()
     {
-        return $this->belongsTo(ComplaintType::class);
+        return $this->belongsTo(ComplaintType::class, 'complaint_type_id');
     }
 
     public function status()
@@ -52,5 +52,10 @@ class Complaint extends Model
     public function firm()
     {
         return $this->belongsTo(Firm::class);
+    }
+
+    public function engineer()
+    {
+        return $this->belongsTo(Engineer::class);
     }
 }

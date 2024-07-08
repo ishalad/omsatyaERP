@@ -17,11 +17,12 @@ class MachineSalesEntryDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param QueryBuilder $query Results from query() method.  sr.no product_sr.no, machine_no , date, product, party, address, mobile_no, contact_person_number, owner_phone_number, order_no, remarks
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addIndexColumn()
             ->addColumn('action', function (MachineSalesEntry $machineSalesEntry) {
                 return  "<div class='btn-group'><a class='btn btn-sm btn-primary' href='" . route('MachineSales.edit', $machineSalesEntry) . "'><i class='fa fa-edit'></i></a> <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $machineSalesEntry->id . ")'><i class='fa fa-trash'></i></a></div>";
             })
@@ -42,42 +43,51 @@ class MachineSalesEntryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('machinesalesentry-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('machinesalesentry-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
      * Get the dataTable columns definition.
      */
+    //  sr.no product_sr.no, machine_no , date, product, party, address, mobile_no, contact_person_number, owner_phone_number, order_no, remarks
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('bill_no'),
+            Column::computed('DT_RowIndex')
+                ->title('No.')
+                ->searchable(false)
+                ->orderable(false),
+            Column::make('serial_no')
+                ->title('Product Serial No.'),
+            Column::make('mc_no')
+                ->title('Machine No.'),
             Column::make('date'),
-            Column::make('order_no'),
-            Column::make('mc_no'),
-            Column::make('party.name'),
             Column::make('product.name'),
-            Column::make('install_date'),
-            Column::make('service_expiry_date'),
-            Column::make('service_type.name'),
+            Column::make('party.name'),
+            Column::make('party.address'),
+            Column::make('party.phone_no')->title('Mobile No.'),
+            Column::make('party.contact_person.phone_no'),
+            Column::make('party.owner.phone_no'),
+            Column::make('order_no'),
+            Column::make('remarks'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

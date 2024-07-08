@@ -9,8 +9,10 @@ class Party extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'address', 'phone_no', 'city_id', 'state_id', 'contact_person_id', 'pincode', 'gst_no', 'owner_id', 'area_id', 'firm_id'
+        'name', 'email', 'pan_no', 'address', 'phone_no', 'city_id', 'state_id', 'contact_person_id', 'pincode', 'gst_no', 'owner_id', 'area_id', 'firm_id', 'other_phone_no'
     ];
+    public $table = "parties";
+
     protected $guarded = ['id'];
 
     public function city()
@@ -30,6 +32,13 @@ class Party extends Model
 
     public function owner()
     {
+        // dd('dd');
+        // dd($this->all());
         return $this->belongsTo(Owner::class, 'owner_id');
+    }
+
+    public function contactPerson()
+    {
+        return $this->belongsTo(ContactPerson::class, 'contact_person_id');
     }
 }

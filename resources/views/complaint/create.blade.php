@@ -23,7 +23,7 @@
                 <div class="card custom-card">
                     <div class="card-header justify-content-between">
                         <div class="card-title">
-                            {{ $title }}
+                            {{ $title }} [Compliant No : {{ $id }}]
                         </div>
                     </div>
                     <div class="card-body gy-4">
@@ -38,9 +38,11 @@
                         @endif
                         <form action="{{ route('complaints.store') }}" method="POST" id="complaint-form">
                             @csrf
+                            {{-- @DD($complaint_no) --}}
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="firm_id" value="{{ App\Models\Firm::first()->id }}">
                             <input type="hidden" name="year_id" value="{{ App\Models\Year::first()->id }}">
+                            <input type="hidden" name="complaint_no" value="{{ $complaint_no }}">
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="input-Date" class="form-label">Date</label>
@@ -55,20 +57,11 @@
                             </div>
 
                             <div class="row mb-1">
-                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputComplain" class="col-form-label">Sales Entry</label>
-                                    <select type="text" id="sales_entry_id" name="sales_entry_id" class="form-control">
-                                        <option value="">Choose a Option</option>
-                                        @foreach (App\Models\MachineSalesEntry::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->id }}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputSale" class="col-form-label">Party Name</label>
+                                <div class="form-group col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                                    <label for="inputSale" class="col-form-label">Party Name</label> <i
+                                        class="text-danger">*</i>
                                     {{-- <input type="text" id="inputSale" class="form-control" /> --}}
-                                    <select class="form-control" data-trigger name="party_id" id="party_id">
+                                    <select class="form-control" name="party_id" id="party_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\Party::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -77,19 +70,33 @@
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                                    <label for="inputComplain" class="col-form-label">Product</label> <i
+                                        class="text-danger">*</i>
+                                    <select type="text" id="sales_entry_id" name="sales_entry_id" class="form-control">
+                                        <option value="">Choose a Option</option>
+                                        {{-- @foreach (App\Models\MachineSalesEntry::all() as $item)
+                                            <option value="{{ $item->id }}">{{ $item->id }}</option>
+                                        @endforeach --}}
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                {{-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputProduct" class="col-form-label">Product </label>
-                                    <select class="form-control" data-trigger name="product_id" id="product_id">
+                                    <select class="form-control" name="product_id" id="product_id">
                                         <option value="">Choose a Product</option>
                                         @foreach (App\Models\Product::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputParty" class="col-form-label">Complaint Type</label>
-                                    <select class="form-control" data-trigger name="complaint_type_id"
-                                        id="complaint_type_id ">
+                                </div> --}}
+                                <input type="hidden" name="product_id" id="product_id">
+                                <div class="form-group col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                                    <label for="inputParty" class="col-form-label">Complaint Type</label> <i
+                                        class="text-danger">*</i>
+                                    <select class="form-control" name="complaint_type_id" id="complaint_type_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\ComplaintType::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -100,8 +107,9 @@
 
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputParty" class="col-form-label">Service Type</label>
-                                    <select class="form-control" data-trigger name="service_type_id" id="service_type_id">
+                                    <label for="inputParty" class="col-form-label">Service Type</label> <i
+                                        class="text-danger">*</i>
+                                    <select class="form-control" name="service_type_id" id="service_type_id">
                                         <option value="">Choose a Service Type</option>
                                         @foreach (App\Models\ServiceType::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -109,11 +117,14 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputStatus" class="col-form-label">Status</label>
-                                    <select class="form-control" data-trigger name="status_id" id="status_id">
+                                    <label for="inputStatus" class="col-form-label">Status</label> <i
+                                        class="text-danger">*</i>
+                                    <select class="form-control" name="status_id" id="status_id">
                                         <option value="">Choose a Product</option>
                                         @foreach (App\Models\Status::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}"
+                                                @if ($item->name == 'Pending') selected @endif>{{ $item->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -145,8 +156,7 @@
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputParty" class="col-form-label">Engineer</label>
-                                                    <select class="form-control" data-trigger name="engineer_id"
-                                                        id="engineer_id">
+                                                    <select class="form-control" name="engineer_id" id="engineer_id">
                                                         <option value="">Choose a Engineer</option>
                                                         @foreach (App\Models\Engineer::all() as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}
@@ -159,7 +169,7 @@
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputJointengg" class="col-form-label">Actual
                                                         Complain</label>
-                                                    <select class="form-control" data-trigger name="engineer_complaint_id"
+                                                    <select class="form-control" name="engineer_complaint_id"
                                                         id="engineer_complaint_id">
                                                         <option value="">Choose a Option</option>
                                                         @foreach (App\Models\ComplaintType::all() as $item)
@@ -207,7 +217,7 @@
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputJointengg" class="col-form-label">Joint
                                                         Engineer</label>
-                                                    <select class="form-control" data-trigger name="joint_engineer_id[]"
+                                                    <select class="form-control" name="joint_engineer_id[]"
                                                         id="joint_engineer_id" multiple>
                                                         <option value="">Choose a Option</option>
                                                         @foreach (App\Models\Engineer::all() as $item)
@@ -262,6 +272,51 @@
             $("#switch-md").on("change", function() {
                 this.setAttribute("checked", true);
             });
+            // $('#sales_entry_id').select2({
+            //     placeholder: 'Select an option'
+            // });
+            $('#party_id').select2({
+                placeholder: 'Select an option'
+            });
+            // $('#product_id').select2({
+            //     placeholder: 'Select an option'
+            // });
+            $('#complaint_type_id').select2({
+                placeholder: 'Select an option'
+            });
+            $('#service_type_id').select2({
+                placeholder: 'Select an option'
+            });
+            $('#status_id').select2({
+                placeholder: 'Select an option'
+            });
+
+            $('#party_id').on('change', function() {
+                var party = $(this).val();
+                var $products = $('#sales_entry_id');
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('party-products') }}",
+                    data: {
+                        'id': party
+                    },
+                    success: function(data) {
+                        console.log(data.length, data);
+                        $products.empty();
+                        $products.append('<option selected disabled>Select Product</option>');
+                        $.each(data, function(key, value) {
+                            $products.append('<option value="' + value
+                                .id + '">' + value.product.name + '-' + value
+                                .serial_no + '-' + value.mc_no + '</option>');
+                        })
+                        $('#sales_entry_id').select2({
+                            placeholder: 'Select an option'
+                        });
+                    }
+                })
+
+            });
             $("#complaint-form").validate({
                 rules: {
                     date: {
@@ -274,9 +329,6 @@
                         required: true
                     },
                     party_id: {
-                        required: true
-                    },
-                    product_id: {
                         required: true
                     },
                     complaint_type_id: {
@@ -303,9 +355,6 @@
                     },
                     party_id: {
                         required: "Please select a party name"
-                    },
-                    product_id: {
-                        required: "Please select a product"
                     },
                     complaint_type_id: {
                         required: "Please select a complaint type"

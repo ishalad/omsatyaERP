@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MachineSalesEntry extends Model
 {
     use HasFactory;
-    protected $fillable = ['firm_id', 'year_id', 'bill_no', 'date', 'party_id', 'product_id', 'person_no', 'mc_no', 'install_date', 'service_expiry_date', 'free_service', 'order_no', 'remarks', 'service_type_id', 'image', 'lat', 'long', 'map_url', 'tag', 'is_active', 'mic_fitting_engineer_id', 'delivery_engineer_id'];
+    protected $fillable = ['firm_id', 'year_id', 'bill_no', 'date', 'party_id', 'product_id', 'serial_no', 'mc_no', 'install_date', 'service_expiry_date', 'free_service', 'order_no', 'remarks', 'service_type_id', 'image', 'lat', 'long', 'map_url', 'tag', 'is_active', 'mic_fitting_engineer_id', 'delivery_engineer_id'];
     protected $id = 'id';
 
     public function firm()
@@ -23,7 +23,7 @@ class MachineSalesEntry extends Model
 
     public function party()
     {
-        return $this->belongsTo(Party::class);
+        return $this->belongsTo(Party::class)->with('contactPerson', 'owner');
     }
 
     public function product()

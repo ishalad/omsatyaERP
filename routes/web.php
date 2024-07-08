@@ -21,16 +21,30 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('parties', PartyController::class)->middleware(['auth']);
+// Route::resource('parties', PartyController::class)->middleware(['auth']);
 Route::resource('MachineSales', MachineSaleEntryController::class)->middleware(['auth']);
 Route::post('update-machine-sales/{id}', [MachineSaleEntryController::class, 'update'])->name('machine-sales.update')->middleware(['auth']);
-
+Route::group(['prefix' => 'parties'], function () {
+    Route::get('/index', [PartyController::class, 'index'])->name('parties.index')->middleware('auth');
+    Route::get('/create', [PartyController::class, 'create'])->name('parties.create')->middleware('auth');
+    Route::post('/store', [PartyController::class, 'store'])->name('parties.store')->middleware('auth');
+    Route::get('edit/{party}', [PartyController::class, 'edit'])->name('parties.edit')->middleware('auth');
+    Route::post('/update/{party}', [PartyController::class, 'update'])->name('parties.update')->middleware('auth');
+    Route::delete('/destroy/{party}', [PartyController::class, 'destroy'])->name('parties.destroy')->middleware('auth');
+    // Route::post('/add-complaint-item-part', [ComplaintController::class, 'AddComplaintItemPart'])->name('complaints.itemPartStore')->middleware('auth');
+});
 Route::group(['prefix' => 'complaints'], function () {
-    Route::get('/index', [ComplaintController::class, 'index'])->name('complaints.index');
-    Route::get('/create', [ComplaintController::class, 'create'])->name('complaints.create');
-    Route::post('/store', [ComplaintController::class, 'store'])->name('complaints.store');
-    Route::get('/edit', [ComplaintController::class, 'edit'])->name('complaints.edit');
-    Route::post('/update', [ComplaintController::class, 'update'])->name('complaints.update');
+    Route::get('/index', [ComplaintController::class, 'index'])->name('complaints.index')->middleware('auth');
+    Route::get('/create', [ComplaintController::class, 'create'])->name('complaints.create')->middleware('auth');
+    Route::post('/store', [ComplaintController::class, 'store'])->name('complaints.store')->middleware('auth');
+    Route::get('/edit/{complaint}', [ComplaintController::class, 'edit'])->name('complaints.edit')->middleware('auth');
+    Route::post('/update/{complaint}', [ComplaintController::class, 'update'])->name('complaints.update')->middleware('auth');
+    Route::delete('/destroy/{complaint}', [ComplaintController::class, 'destroy'])->name('complaints.destroy')->middleware('auth');
+    Route::post('/add-complaint-item-part', [ComplaintController::class, 'AddComplaintItemPart'])->name('complaints.itemPartStore')->middleware('auth');
 });
 
-require __DIR__.'/auth.php';
+route::get('party-products', [ComplaintController::class, 'partyProducts'])->name('party-products')->middleware('auth');
+
+
+
+require __DIR__ . '/auth.php';

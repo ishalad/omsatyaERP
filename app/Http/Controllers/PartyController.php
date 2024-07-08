@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\partiesDataTable;
+use App\DataTables\PartyDataTable;
 use App\Http\Requests\PartyCreateRequest;
 use App\Models\Party;
 use Flasher\Toastr\Laravel\Facade\Toastr;
@@ -13,7 +14,7 @@ class PartyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(partiesDataTable $dataTable)
+    public function index(PartyDataTable $dataTable)
     {
         $data['title'] = 'Party List';
         return $dataTable->render('party.index', $data);
@@ -41,20 +42,8 @@ class PartyController extends Controller
         } else {
             return redirect()->route('parties.create')->with($request->errors());
         }
-
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Party $party)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Party $party)
     {
         $data['title'] = 'Edit Party';

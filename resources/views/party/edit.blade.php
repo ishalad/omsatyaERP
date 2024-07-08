@@ -39,7 +39,7 @@
                     @endif
                     <form action="{{ route('parties.update', ['party' => $party]) }}" method="POST" id="party-form">
                         @csrf
-                        @method('PUT')
+                        @method('post')
                         <input type="hidden" class="form-control" placeholder="Firm Id"
                             value="{{ $party->firm_id ?? App\Models\Firm::first()->id }}" name="firm_id">
                         {{-- @include('partials.alert') --}}
@@ -51,37 +51,58 @@
                         </div> --}}
 
                             <div class="row mb-2">
-                                <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="inputName" class="col-form-label">Party Name</label>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputName" class="col-form-label">Party Name</label><i
+                                        class="text-danger">*</i>
                                     <input type="text" id="inputName" class="form-control"
                                         aria-describedby="nameHelpInline" name="name"
                                         value="{{ $party->name ?? old('name') }}">
                                 </div>
+                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputName" class="col-form-label">Party Email</label>
+                                    <input type="text" id="inputName" class="form-control" name="email"
+                                        value="{{ $party->email ?? old('email') }}">
+                                </div>
                                 <!-- <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputshort" class="col-form-label">short code</label>
-                                    <input type="number" id="inputshort" class="form-control"
-                                        aria-describedby="nameHelpInline">
-                                </div> -->
+                                                                                                    <label for="inputshort" class="col-form-label">short code</label>
+                                                                                                    <input type="number" id="inputshort" class="form-control"
+                                                                                                        aria-describedby="nameHelpInline">
+                                                                                                </div> -->
                             </div>
 
                             <div class="row mb-2">
                                 <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <label for="input-textarea" class="col-form-label">Address</label>
+                                    <label for="input-textarea" class="col-form-label">Address</label> <i
+                                        class="text-danger">*</i>
                                     <textarea type="text" class="form-control" id="input-textarea" placeholder="Address..." name="address">{{ $party->address ?? old('address') }}</textarea>
                                 </div>
                             </div>
                             <div class="row mb-2">
+
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputName" class="col-form-label">Pincode</label>
-                                    <input type="number" class="form-control" maxlength="6"
-                                        aria-describedby="nameHelpInline" name="pincode"
-                                        value="{{ $party->pincode ?? old('pincode') }}">
+                                    <label for="inputArea" class="col-form-label">Area</label> <i class="text-danger">*</i>
+                                    <select class="form-control" data-trigger id="area" name="area_id">
+                                        <option value="">Choose a Option</option>
+                                        @foreach (App\Models\Area::all() as $item)
+                                            <option value="{{ $item->id }}"
+                                                @if ($party->area_id == $item->id || old('area_id') == $item->id) selected @endif>{{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputshort" class="col-form-label">Mobile no.</label>
+                                    <label for="inputshort" class="col-form-label">Mobile no.</label> <i
+                                        class="text-danger">*</i>
                                     <input type="tel" id="inputshort" class="form-control"
                                         aria-describedby="nameHelpInline" name="phone_no"
                                         value="{{ $party->phone_no ?? old('phone_no') }}">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="form-group col-xl-6 col-lg-6 col-md-8 col-sm-12">
+                                    <label for="other_phone_no" class="col-form-label">Other Phone No.</label>
+                                    <input type="tel" id="other_phone_no" class="form-control" name="other_phone_no"
+                                        value="{{ $party->other_phone_no ?? old('other_phone_no') }}">
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -111,21 +132,17 @@
                             </div>
 
                             <div class="row mb-2">
+
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputArea" class="col-form-label">Area</label>
-                                    <select class="form-control" data-trigger id="area" name="area_id">
-                                        <option value="">Choose a Option</option>
-                                        @foreach (App\Models\Area::all() as $item)
-                                            <option value="{{ $item->id }}"
-                                                @if ($party->area_id == $item->id || old('area_id') == $item->id) selected @endif>{{ $item->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <label for="inputName" class="col-form-label">Pan number</label> <i
+                                        class="text-danger">*</i>
+                                    <input type="text" class="form-control" name="pan_no"
+                                        value="{{ $party->pan_no ?? old('pan_no') }}">
                                 </div>
 
-
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputGst" class="col-form-label">Gst no.</label>
+                                    <label for="inputGst" class="col-form-label">Gst no.</label> <i
+                                        class="text-danger">*</i>
                                     <input type="text" id="inputGst" class="form-control"
                                         aria-describedby="nameHelpInline" name="gst_no"
                                         value="{{ $party->gst_no ?? old('gst_no') }}">
@@ -160,18 +177,18 @@
                                 </div>
                             </div>
                             <!-- <div class="row mb-2">
-                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputaccount" class="col-form-label">Bank account</label>
-                                    <input type="number" id="inputaccount" class="form-control"
-                                        aria-describedby="nameHelpInline">
-                                </div>
-                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputIfsc" class="col-form-label">Bank Ifsc</label>
-                                    <input type="text" id="inputIfsc" class="form-control"
-                                        aria-describedby="nameHelpInline">
-                                </div>
-        
-                            </div> -->
+                                                                                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                                                                                    <label for="inputaccount" class="col-form-label">Bank account</label>
+                                                                                                    <input type="number" id="inputaccount" class="form-control"
+                                                                                                        aria-describedby="nameHelpInline">
+                                                                                                </div>
+                                                                                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                                                                                    <label for="inputIfsc" class="col-form-label">Bank Ifsc</label>
+                                                                                                    <input type="text" id="inputIfsc" class="form-control"
+                                                                                                        aria-describedby="nameHelpInline">
+                                                                                                </div>
+                                                                        
+                                                                                            </div> -->
 
                             <div class="row mb-2">
                                 <!-- ======submit=button==== -->
@@ -179,11 +196,12 @@
                                     <div class="row justify-content-end mt-3">
                                         {{-- <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mb-2 ">
                                         <button class="btn btn-outline-success w-100">Add more</button>
-                                    </div>
-    
-                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mb-2 ">
-                                        <button class="btn btn-outline-light w-100">Reset</button>
                                     </div> --}}
+
+                                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2 ">
+                                            <input type="reset" class="btn btn-outline-light w-100">
+                                            {{-- <button class="btn btn-outline-light w-100">Reset</button> --}}
+                                        </div>
 
                                         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mb-2 ">
                                             <button class="btn btn-primary w-100" type="submit">Submit</button>
@@ -210,6 +228,20 @@
     {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> --}}
     <script type="text/javascript">
         $(document).ready(function() {
+            $('#city').select2({
+                placeholder: 'Select an option'
+            });
+            $('#state').select2({
+                placeholder: 'Select an option'
+            });
+
+            $('#contact_person_id').select2({
+                placeholder: 'Select an option'
+            });
+
+            $('#owner_id').select2({
+                placeholder: 'Select an option'
+            });
             $('#party-form').validate({
                 rules: {
                     name: {
@@ -220,23 +252,11 @@
                         required: true,
                         minlength: 10
                     },
-                    pincode: {
-                        required: true,
-                        digits: true,
-                        minlength: 6,
-                        maxlength: 6
-                    },
                     phone_no: {
                         required: true,
                         digits: true,
                         minlength: 10,
                         maxlength: 10
-                    },
-                    city_id: {
-                        required: true
-                    },
-                    state_id: {
-                        required: true
                     },
                     area_id: {
                         required: true
@@ -246,11 +266,10 @@
                         minlength: 15,
                         maxlength: 15
                     },
-                    contact_person_id: {
-                        required: true
-                    },
-                    owner_id: {
-                        required: true
+                    pan_no: {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10
                     }
                 },
                 messages: {
@@ -262,23 +281,11 @@
                         required: "Please enter the address",
                         minlength: "The address must be at least 10 characters long"
                     },
-                    pincode: {
-                        required: "Please enter the pincode",
-                        digits: "The pincode must be numeric",
-                        minlength: "The pincode must be 6 digits long",
-                        maxlength: "The pincode must be 6 digits long"
-                    },
                     phone_no: {
                         required: "Please enter the mobile number",
                         digits: "The mobile number must be numeric",
                         minlength: "The mobile number must be 10 digits long",
                         maxlength: "The mobile number must be 10 digits long"
-                    },
-                    city_id: {
-                        required: "Please select a city"
-                    },
-                    state_id: {
-                        required: "Please select a state"
                     },
                     area_id: {
                         required: "Please select an area"
@@ -288,12 +295,6 @@
                         minlength: "The GST number must be 15 characters long",
                         maxlength: "The GST number must be 15 characters long"
                     },
-                    contact_person_id: {
-                        required: "Please select a contact person"
-                    },
-                    owner_id: {
-                        required: "Please select an owner"
-                    }
                 },
                 errorElement: 'div',
                 errorPlacement: function(error, element) {

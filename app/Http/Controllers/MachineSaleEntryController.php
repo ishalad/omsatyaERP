@@ -36,16 +36,17 @@ class MachineSaleEntryController extends Controller
     {
         $data['title'] = 'Create Machine Sales Entry';
         $data = $request->all();
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
+        if ($request->image) {
+            $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('public/uploads/MachineSalesEntry'), $filename);
+            $file->move(public_path('public'), $filename);
             $data['image'] = $filename;
         }
         MachineSalesEntry::create($data);
-        return redirect()->route('MachineSales.index')->with('success', 'Machine Sales Entry Added Successfully');
-    } 
-    
+        Toastr::success('Machine Sales Entry Added Successfully');
+        return redirect()->route('MachineSales.index');
+    }
+
 
     /**
      * Display the specified resource.
@@ -86,7 +87,7 @@ class MachineSaleEntryController extends Controller
             Toastr::error('Machine Sales Entry Not Updated Successfully');
             return redirect()->route('MachineSales.edit', $id)->withInput();
         }
-        return redirect()->route('MachineSales.index');        
+        return redirect()->route('MachineSales.index');
     }
 
     /**

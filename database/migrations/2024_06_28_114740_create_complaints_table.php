@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('firm_id');
             $table->unsignedBigInteger('year_id');
+            $table->unsignedBigInteger('party_id');
             $table->date('date');
             $table->time('time');
             $table->unsignedBigInteger('complaint_type_id');
@@ -34,7 +35,7 @@ return new class extends Migration
             $table->string('jointengg', 15)->nullable();
             $table->unsignedBigInteger('service_type_id');
             $table->unsignedBigInteger('status_id');
-            $table->string('complaint', 255)->nullable();
+            $table->string('complaint_id', 255)->nullable();
             $table->timestamps();
 
             // Define foreign key constraints
