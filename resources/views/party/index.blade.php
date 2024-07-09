@@ -52,7 +52,7 @@
 @section('scripts')
 
     {{-- <script src="{{asset('js\datatables.js')}}"></script> --}}
-    <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script> --}}
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
     <script type="text/javascript">
         $(document).ready(function() {
@@ -88,6 +88,11 @@
                             },
                             error: function(data) {
                                 console.log('Error:', data);
+                                Swal.fire({
+                                    title: "Not Deleted!",
+                                    text: data.responseJSON.message,
+                                    icon: "error"
+                                });
                             }
                         });
 

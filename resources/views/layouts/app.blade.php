@@ -42,6 +42,9 @@
 
         <link rel="stylesheet" href="{{ asset('libs/prismjs/themes/prism-coy.min.css') }}">
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+
         @yield('css')
         <!-- Scripts -->
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
@@ -1036,17 +1039,18 @@
         <!-- Simplebar JS -->
         <script src="{{ asset('libs/simplebar/simplebar.min.js') }}"></script>
         <script src="{{ asset('js/simplebar.js') }}"></script>
-
+        
+        
         <!-- Color Picker JS -->
         <script src="{{ asset('libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
-
+        
         <!-- Date & Time Picker JS -->
         <script src="{{ asset('libs/flatpickr/flatpickr.min.j') }}s"></script>
         <script src="{{ asset('js/date-range.js') }}"></script>
-
-
+        
+        
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+        
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
@@ -1055,6 +1059,7 @@
         <script src="{{ asset('libs/prismjs/prism.js') }}"></script>
         <script src="{{ asset('js/prism-custom.j') }}s"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
         <!-- Custom JS -->
         <script src="{{ asset('js/custom.js') }}"></script>
@@ -1081,6 +1086,9 @@
                                 },
                                 success: function() {
                                     window.location.href = "{{ route('login') }}";
+                                },
+                                always: function() {
+                                    window.location.reload();
                                 }
                             })
                         }

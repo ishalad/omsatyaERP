@@ -78,7 +78,9 @@
                                     <select type="text" id="sales_entry_id" name="sales_entry_id" class="form-control">
                                         <option value="">Choose a Option</option>
                                         @foreach ($sales_entries as $item)
-                                            <option value="{{ $item->id }}">{{ $item->product->name }}</option>
+                                            <option value="{{ $item->id }}"
+                                                {{ $item->id == $complaint->sales_entry_id ? 'selected' : '' }}>
+                                                {{ $item->product->name . ' - ' . $item->serial_no . ' - ' . $item->mc_no }}</option>
                                         @endforeach
                                     </select>
 
@@ -146,7 +148,7 @@
                                         <h5 class="px-4 mb-0" for="switch-md">Engineer Select</h5>
                                     </div>
                                 </div>
-
+                                {{-- @dd($complaint->engineer_id) --}}
                                 <div class="row my-3">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="row">
@@ -183,6 +185,14 @@
 
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                                    <label for="inputDate" class="col-form-label">Engineer In Date</label>
+                                                    <input type="date" class="form-control" placeholder="yy/mm/dd"
+                                                        name="engineer_in_date" id="engineer_in_date"
+                                                        value="{{ $complaint->engineer_in_date }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
+                                                <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputshort" class="col-form-label">Engineer In
                                                         Time</label>
                                                     <input type="time" class="form-control" placeholder="hh:mm"
@@ -190,15 +200,6 @@
                                                         value="{{ $complaint->engineer_in_time }}">
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                                    <label for="inputDate" class="col-form-label">Engineer In Date</label>
-                                                    <input type="date" class="form-control" placeholder="yy/mm/dd"
-                                                        name="engineer_in_date" id="engineer_in_date"
-                                                        value="{{ $complaint->engineer_in_date }}">
-                                                </div>
-                                            </div>
-
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputDate" class="col-form-label">Engineer Out
@@ -226,7 +227,9 @@
                                                         multiple>
                                                         <option value="">Choose a Option</option>
                                                         @foreach (App\Models\Engineer::all() as $item)
-                                                            <option value="{{ $item->id }}">{{ $item->name }}
+                                                            <option value="{{ $item->id }}"
+                                                                @if ( isset($complaint->jointengg) && in_array($item->id, $complaint->jointengg)) selected @endif>
+                                                                {{ $item->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -274,10 +277,14 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            
             $("#switch-md").on("change", function() {
                 this.setAttribute("checked", true);
             });
-
+            var engineer_id = '{{ $complaint->engineer_id ?? 0 }}';
+            if (engineer_id != 0) {
+                $("#switch-md").trigger("click");
+            }
             $('#party_id').on('change', function() {
                 var party = $(this).val();
                 var $products = $('#sales_entry_id');
@@ -294,8 +301,8 @@
                         $products.append('<option selected disabled>Select Product</option>');
                         $.each(data, function(key, value) {
                             $products.append('<option value="' + value
-                                .id + '">' + value.product.name + '-' + value
-                                .serial_no + '-' + value.mc_no + '</option>');
+                                .id + '">' + value.product.name + '- ' + value
+                                .serial_no + '- ' + value.mc_no + '</option>');
                         })
                         $('#sales_entry_id').select2({
                             placeholder: 'Select an option'

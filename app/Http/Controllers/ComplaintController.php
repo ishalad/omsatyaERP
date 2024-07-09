@@ -11,15 +11,56 @@ use App\Models\MachineSalesEntry;
 use App\Models\Year;
 use Flasher\Toastr\Laravel\Facade\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class ComplaintController extends Controller
 {
 
 
-    public function index(ComplaintDataTable $dataTable)
+    public function index(Request $request)
     {
         $data['title'] = 'Complaint List';
-        return $dataTable->render('complaint.index', $data);
+        if ($request->ajax()) {
+            // dd($request->all());
+            $collection = Complaint::query()->with('year', 'complaintType', 'salesEntry', 'product', 'engineer', 'serviceType', 'status')->latest()->get();
+            return DataTables::of($collection)
+                ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('engineer_name'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return Str::contains($row['engineer'], $request->get('engineer_name')) ? true : false;
+                        });
+                    }
+                    if (!empty($request->get('from_date')) && !empty($request->get('to_date'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return $row['date'] >= $request->get('from_date') && $row['date'] <= $request->get('to_date') ? true : false;
+                        });
+                    }
+                    if (!empty($request->get('status'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return Str::contains($row['status'], $request->get('status')) ? true : false;
+                        });
+                    }
+                })
+                ->addColumn('action', function (Complaint $complaint) {
+                    return "<div class='btn-group'>
+                            <a class='btn btn-sm btn-primary' href='" . route('complaints.edit', ['complaint' => $complaint]) . "'><i class='fa fa-edit'></i></a>
+                            <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $complaint->id . ")'><i class='fa fa-trash'></i></a>
+                            </div>";
+                    // <a class='btn btn-sm btn-info' href='javascript:void(0)' onclick='window.addItemPart(" . $complaint->id . ")'><i class='fa fa-product-hunt'></i></a>
+                })
+                ->addColumn('engineer', function ($row) {
+                    return $row->engineer->name ?? 'N/A';
+                })
+                ->addColumn('status', function ($row) {
+                    return $row->status->name ?? 'N/A';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('complaint.index', $data);
+        // return $dataTable->render('complaint.index', $data);
     }
 
     public function create()
@@ -84,5 +125,22 @@ class ComplaintController extends Controller
         // dd($request->id);
         $partyProducts = MachineSalesEntry::where('party_id', $request->id)->with('product')->get();
         return response()->json($partyProducts, 200);
+    }
+
+    public function report()
+    {
+        $defaultColumns = ['sr_no', 'date', 'time', 'complaint_no', 'party.name', 'party.address', 'sales_entry.mc_no', 'sales_entry.party.name', 'sales_entry.party.phone_no', 'complaint_type.name', 'service_type.name', 'status', 'created_at'];
+        $optionalColumns = ['updated_at', 'assigned_to', 'priority'];
+
+        return view('complaint.report', compact('defaultColumns', 'optionalColumns'));
+    }
+
+    public function data(Request $request)
+    {
+        dd($request->all());
+        $columns = array_merge($request->default_columns, $request->optional_columns);
+        $complaints = Complaint::select($columns);
+
+        return DataTables::of($complaints)->make(true);
     }
 }

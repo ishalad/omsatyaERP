@@ -71,9 +71,9 @@
 
                             <div class="row mb-1">
                                 <!-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                                                                    <label for="inputParty" class="col-form-label">Party Name</label>
-                                                                                    <input type="text" id="inputParty" class="form-control" />
-                                                                                </div> -->
+                                                                                                <label for="inputParty" class="col-form-label">Party Name</label>
+                                                                                                <input type="text" id="inputParty" class="form-control" />
+                                                                                            </div> -->
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Party Name</label> <i
@@ -90,9 +90,9 @@
                                 </div>
 
                                 <!-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                                                                    <label for="inputProduct" class="col-form-label">Product</label>
-                                                                                    <input type="text" id="inputProduct" class="form-control" />
-                                                                                </div> -->
+                                                                                                <label for="inputProduct" class="col-form-label">Product</label>
+                                                                                                <input type="text" id="inputProduct" class="form-control" />
+                                                                                            </div> -->
 
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
@@ -147,8 +147,8 @@
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Free Service</label>
-                                    <input type="number" name="free_service" id="free_service" class="form-control"
-                                        value="{{ $machine->free_service ?? old('free_service') }}">
+                                    <input type="text" name="free_service" id="free_service" class="form-control"
+                                        value="{{ $machine->free_service ?? (old('free_service') ?? 0) }}">
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Service Type</label> <i
@@ -227,9 +227,9 @@
 
                             <div class="row mb-1">
                                 <!-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                                                                    <label for="inputTag" class="col-form-label">Tag</label>
-                                                                                    <input type="text" id="inputTag" class="form-control" />
-                                                                                </div> -->
+                                                                                                <label for="inputTag" class="col-form-label">Tag</label>
+                                                                                                <input type="text" id="inputTag" class="form-control" />
+                                                                                            </div> -->
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputActive" class="col-form-label">Is Active</label>
                                     <div class="form-check form-switch">
@@ -322,8 +322,11 @@
                     service_type_id: {
                         required: true
                     },
-                    free_service: {
+                    serial_no: {
                         required: true
+                    }
+                    free_service: {
+                        number: true
                     },
                     remark: {
                         required: true
@@ -335,7 +338,7 @@
                         required: true
                     },
                     map_url: {
-                        required: true
+                        url: true
                     }
                 },
                 messages: {

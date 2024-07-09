@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Party extends Model
 {
@@ -40,5 +41,15 @@ class Party extends Model
     public function contactPerson()
     {
         return $this->belongsTo(ContactPerson::class, 'contact_person_id');
+    }
+
+    /**
+     * Get all of the machineSales for the Party
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function machineSales(): HasMany
+    {
+        return $this->hasMany(MachineSalesEntry::class, 'party_id', 'id');
     }
 }

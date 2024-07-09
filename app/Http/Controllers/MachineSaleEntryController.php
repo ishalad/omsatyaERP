@@ -7,6 +7,8 @@ use App\Http\Requests\MachineSalesEntryRequest;
 use App\Models\MachineSalesEntry;
 use Flasher\Toastr\Laravel\Facade\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class MachineSaleEntryController extends Controller
 {
@@ -69,12 +71,28 @@ class MachineSaleEntryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MachineSalesEntryRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $data['title'] = 'Edit Machine Sales Entry';
         $data = $request->all();
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
+        Validator::make($data, [
+            "date" => "required|before_or_equal:today",
+            "bill_no" => "required|numeric",
+            "party_id" => "required",
+            "mc_no" => ["required", Rule::unique('machine_sales_entries')->ignore($id)],
+            "serial_no" => [Rule::unique('machine_sales_entries')->ignore($id), 'required'], //sr_no
+            "install_date" => "required|after_or_equal:date",
+            "service_expiry_date" => "required|after_or_equal:install_date",
+            "order_no" => "required",
+            "free_service" => "numeric|min:0|max:9",
+            "service_type_id" => "required",
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'map_url' => "active_url",
+            "mic_fitting_engineer_id" => "required",
+            "delivery_engineer_id" => "required",
+        ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('public/uploads/MachineSalesEntry'), $filename);
             $data['image'] = $filename;

@@ -71,6 +71,9 @@ class PartyController extends Controller
      */
     public function destroy(Party $party)
     {
+        if ($party->machineSales) {
+            return response()->json(['message' => 'Party can not be deleted'], 422);
+        }
         $party->delete();
         Toastr::success('Party deleted successfully');
         return response()->json(['message' => 'Party deleted successfully']);

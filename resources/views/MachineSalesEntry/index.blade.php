@@ -43,7 +43,7 @@
 @section('scripts')
 {{-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script> --}}
-<script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+{{-- <script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script> --}}
 
 {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 <script type="text/javascript">

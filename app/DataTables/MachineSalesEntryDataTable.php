@@ -79,8 +79,8 @@ class MachineSalesEntryDataTable extends DataTable
             Column::make('party.name'),
             Column::make('party.address'),
             Column::make('party.phone_no')->title('Mobile No.'),
-            Column::make('party.contact_person.phone_no'),
-            Column::make('party.owner.phone_no'),
+            Column::make('party.contact_person.phone_no')->title('Contact Person Mobile Number'),
+            Column::make('party.owner.phone_no')->title('Owner Mobile Number'),
             Column::make('order_no'),
             Column::make('remarks'),
             Column::computed('action')

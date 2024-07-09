@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Complaint;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Http\Request;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -21,17 +22,49 @@ class ComplaintDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        // $request = new Request;
+        // // dump($request->all());
+        // if ($request->has('date')) {
+        //     $query->whereDate('date', $request->get('date'));
+        // }
+
+        // if ($request->has('engineer_name')) {
+        //     $query->whereHas('engineer', function ($q) use ($request) {
+        //         $q->where('name', 'like', '%' . $request->get('engineer_name') . '%');
+        //     });
+        // }
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->addColumn('action', function (Complaint $complaint) {
                 return "<div class='btn-group'>
                         <a class='btn btn-sm btn-primary' href='" . route('complaints.edit', ['complaint' => $complaint]) . "'><i class='fa fa-edit'></i></a>
                         <a class='btn btn-sm btn-danger' href='javascript:void(0)' onclick='window.deleteParty(" . $complaint->id . ")'><i class='fa fa-trash'></i></a>
-                        <a class='btn btn-sm btn-info' href='javascript:void(0)' onclick='window.addItemPart(" . $complaint->id . ")'><i class='fa fa-product-hunt'></i></a>
-                    </div>";
+                        </div>";
+                // <a class='btn btn-sm btn-info' href='javascript:void(0)' onclick='window.addItemPart(" . $complaint->id . ")'><i class='fa fa-product-hunt'></i></a>
             })
             ->addColumn("engineer_name", function (Complaint $complaint) {
                 return $complaint->engineer->name ?? ' N/A';
+            })
+            ->addColumn("service_type_name", function (Complaint $complaint) {
+                return $complaint->serviceType->name ?? ' N/A';
+            })
+            ->addColumn("status_name", function (Complaint $complaint) {
+                return $complaint->status->name ?? ' N/A';
+            })
+            ->addColumn("complaint_type_name", function (Complaint $complaint) {
+                return $complaint->complaintType->name ?? ' N/A';
+            })
+            ->addColumn("product_name", function (Complaint $complaint) {
+                return $complaint->product->name ?? ' N/A';
+            })
+            ->addColumn("sales_entry_mc_no", function (Complaint $complaint) {
+                return $complaint->salesEntry->mc_no ?? ' N/A';
+            })
+            ->addColumn("sales_entry_party_name", function (Complaint $complaint) {
+                return $complaint->salesEntry->party->name ?? ' N/A';
+            })
+            ->addColumn("sales_entry_party_phone_no", function (Complaint $complaint) {
+                return $complaint->salesEntry->party->phone_no ?? ' N/A';
             })
             ->setRowId('id');
     }
@@ -78,14 +111,14 @@ class ComplaintDataTable extends DataTable
                 ->orderable(false),
             Column::make('date'),
             Column::make('time'),
-            Column::make('complaint_no'),
-            Column::make('product.name'),
-            Column::make('sales_entry.mc_no')->title('Machine No'),
-            Column::make('sales_entry.party.name')->title('Party Name'),
-            Column::make('sales_entry.party.phone_no')->title('Party Mobile Number'),
-            Column::make('complaint_type.name'),
-            Column::make('service_type.name'),
-            Column::make('status.name'),
+            Column::make('id'),
+            Column::make('product_name'),
+            Column::make('sales_entry_mc_no')->title('Machine No'),
+            Column::make('sales_entry_party_name')->title('Party Name'),
+            Column::make('sales_entry_party_phone_no')->title('Party Mobile Number'),
+            Column::make('complaint_type_name'),
+            Column::make('service_type_name'),
+            Column::make('status_name'),
             Column::make('engineer_name'),
             Column::computed('action')
                 ->exportable(false)

@@ -135,8 +135,8 @@
                             <div class=" row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Free Service</label>
-                                    <input type="number" name="free_service" id="free_service" class="form-control"
-                                        value="{{ old('free_service') }}">
+                                    <input type="text" name="free_service" id="free_service" class="form-control"
+                                        value="{{ old('free_service') ?? 0 }}">
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Service Type</label> <i
@@ -276,6 +276,9 @@
                     order_no: {
                         required: true
                     },
+                    serial_no: {
+                        required: true
+                    },
                     mc_no: {
                         required: true
                     },
@@ -291,10 +294,7 @@
                         required: true
                     },
                     free_service: {
-                        required: true
-                    },
-                    remark: {
-                        required: true
+                        number: true
                     },
                     mic_fitting_engineer_id: {
                         required: true
@@ -303,7 +303,7 @@
                         required: true
                     },
                     map_url: {
-                        required: true
+                        url: true
                     }
                 },
                 messages: {
@@ -340,18 +340,6 @@
                     free_service: {
                         required: "Please select a free service option"
                     },
-                    remarks: {
-                        required: "Please enter a remarks"
-                    },
-                    mic_fitting_engineer_id: {
-                        required: "Please select a fitting engineer"
-                    },
-                    delivery_engineer_id: {
-                        required: "Please select a delivery engineer"
-                    },
-                    map_url: {
-                        required: "Please enter the map location URL"
-                    }
                 },
                 errorElement: 'div',
                 errorPlacement: function(error, element) {

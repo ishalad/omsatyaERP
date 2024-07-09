@@ -27,9 +27,9 @@ class MachineSalesEntryRequest extends FormRequest
             "party_id" => "required",
             "mc_no" => "required",
             "serial_no" => "required|unique:machine_sales_entries", //sr_no
-            "install_date" => "required",
-            "service_expiry_date" => "required",
-            "order_no" => "required|unique:machine_sales_entries",
+            "install_date" => "required|after_or_equal:date",
+            "service_expiry_date" => "required|after_or_equal:install_date",
+            "order_no" => "required",
             "free_service" => "numeric|min:0|max:9",
             "service_type_id" => "required",
             // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',

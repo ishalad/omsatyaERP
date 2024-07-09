@@ -75,15 +75,15 @@ class PartyDataTable extends DataTable
                 ->title('No.')
                 ->searchable(false)
                 ->orderable(false),
-            Column::make('name'),
+            Column::make('name')->title('Party Name'),
             Column::make('address'),
             Column::make('phone_no')
-                ->title('mobile No.'),
+                ->title('Mobile No.'),
             Column::make('city.name'),
             Column::make('area.name'),
             Column::make('contct_person'),
             Column::make('owner_name'),
-            Column::make('id'),
+            Column::make('id')->title('ID'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

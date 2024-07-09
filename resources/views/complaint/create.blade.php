@@ -64,7 +64,7 @@
                                     <select class="form-control" name="party_id" id="party_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\Party::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}">{{ $item->name . ' (  ' . $item->address . ' )' }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -181,18 +181,18 @@
                                             </div>
 
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
+                                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                                        <label for="inputDate" class="col-form-label">Engineer In Date</label>
+                                                        <input type="date" class="form-control" placeholder="yy/mm/dd"
+                                                            name="engineer_in_date" id="engineer_in_date">
+                                                    </div>
+                                                </div>
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputshort" class="col-form-label">Engineer In
                                                         Time</label>
                                                     <input type="time" class="form-control" placeholder="hh:mm"
                                                         name="engineer_in_time" id="engineer_in_time">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
-                                                <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                                    <label for="inputDate" class="col-form-label">Engineer In Date</label>
-                                                    <input type="date" class="form-control" placeholder="yy/mm/dd"
-                                                        name="engineer_in_date" id="engineer_in_date">
                                                 </div>
                                             </div>
 
@@ -302,13 +302,12 @@
                         'id': party
                     },
                     success: function(data) {
-                        console.log(data.length, data);
                         $products.empty();
                         $products.append('<option selected disabled>Select Product</option>');
                         $.each(data, function(key, value) {
                             $products.append('<option value="' + value
-                                .id + '">' + value.product.name + '-' + value
-                                .serial_no + '-' + value.mc_no + '</option>');
+                                .id + '">' + value.product.name + '- ' + value
+                                .serial_no + '- ' + value.mc_no + '</option>');
                         })
                         $('#sales_entry_id').select2({
                             placeholder: 'Select an option'

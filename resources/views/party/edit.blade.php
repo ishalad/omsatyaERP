@@ -64,10 +64,10 @@
                                         value="{{ $party->email ?? old('email') }}">
                                 </div>
                                 <!-- <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                                                                                    <label for="inputshort" class="col-form-label">short code</label>
-                                                                                                    <input type="number" id="inputshort" class="form-control"
-                                                                                                        aria-describedby="nameHelpInline">
-                                                                                                </div> -->
+                                                                                                        <label for="inputshort" class="col-form-label">short code</label>
+                                                                                                        <input type="number" id="inputshort" class="form-control"
+                                                                                                            aria-describedby="nameHelpInline">
+                                                                                                    </div> -->
                             </div>
 
                             <div class="row mb-2">
@@ -81,7 +81,7 @@
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputArea" class="col-form-label">Area</label> <i class="text-danger">*</i>
-                                    <select class="form-control" data-trigger id="area" name="area_id">
+                                    <select class="form-control" id="area" name="area_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\Area::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -108,7 +108,7 @@
                             <div class="row mb-2">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputshort" class="col-form-label">City</label>
-                                    <select class="form-control" data-trigger id="city" name="city_id">
+                                    <select class="form-control" id="city" name="city_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\City::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputState" class="col-form-label">State</label>
-                                    <select class="form-control" data-trigger id="state" name="state_id">
+                                    <select class="form-control" id="state" name="state_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\State::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -154,8 +154,7 @@
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputPan" class="col-form-label">Cont.Person</label>
-                                    <select class="form-control" data-trigger id="contact_person_id"
-                                        name="contact_person_id">
+                                    <select class="form-control" id="contact_person_id" name="contact_person_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\ContactPerson::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -166,7 +165,7 @@
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputOwner" class="col-form-label">Owner Name</label>
-                                    <select class="form-control" data-trigger id="owner_id" name="owner_id">
+                                    <select class="form-control" id="owner_id" name="owner_id">
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\Owner::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -177,18 +176,18 @@
                                 </div>
                             </div>
                             <!-- <div class="row mb-2">
-                                                                                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                                                                                    <label for="inputaccount" class="col-form-label">Bank account</label>
-                                                                                                    <input type="number" id="inputaccount" class="form-control"
-                                                                                                        aria-describedby="nameHelpInline">
-                                                                                                </div>
-                                                                                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                                                                                    <label for="inputIfsc" class="col-form-label">Bank Ifsc</label>
-                                                                                                    <input type="text" id="inputIfsc" class="form-control"
-                                                                                                        aria-describedby="nameHelpInline">
-                                                                                                </div>
-                                                                        
-                                                                                            </div> -->
+                                                                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                                                                                        <label for="inputaccount" class="col-form-label">Bank account</label>
+                                                                                                        <input type="number" id="inputaccount" class="form-control"
+                                                                                                            aria-describedby="nameHelpInline">
+                                                                                                    </div>
+                                                                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                                                                                        <label for="inputIfsc" class="col-form-label">Bank Ifsc</label>
+                                                                                                        <input type="text" id="inputIfsc" class="form-control"
+                                                                                                            aria-describedby="nameHelpInline">
+                                                                                                    </div>
+                                                                            
+                                                                                                </div> -->
 
                             <div class="row mb-2">
                                 <!-- ======submit=button==== -->
