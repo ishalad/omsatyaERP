@@ -29,11 +29,10 @@ class ComplaintRequest extends FormRequest
             // "product_id" => "required",
             "complaint_type_id" => "required",
             "status_id" => "required",
-            // "engineer_id" => "required",
-            // "engineer_in_time" => "required|date_format:H:i",
-            // "engineer_in_date" => "required",
-            // "engineer_out_date" => "required",
-            // "engineer_out_time" => "required|date_format:H:i",
+            "engineer_in_time" => "after_or_equal:time",
+            "engineer_in_date" => "after_or_equal:date",
+            "engineer_out_date" => "after_or_equal:engineer_in_date",
+            "engineer_out_time" => "after_or_equal:engineer_in_time",
         ];
     }
 }

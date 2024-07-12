@@ -112,7 +112,7 @@
                                     <select class="form-control" name="service_type_id" id="service_type_id">
                                         <option value="">Choose a Service Type</option>
                                         @foreach (App\Models\ServiceType::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" {{$loop->first ? 'selected' : ''}}>{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -185,14 +185,16 @@
                                                     <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                         <label for="inputDate" class="col-form-label">Engineer In Date</label>
                                                         <input type="date" class="form-control" placeholder="yy/mm/dd"
-                                                            name="engineer_in_date" id="engineer_in_date">
+                                                            name="engineer_in_date" id="engineer_in_date" value="{{ date('Y-m-d') }}">
                                                     </div>
                                                 </div>
-                                                <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                                    <label for="inputshort" class="col-form-label">Engineer In
-                                                        Time</label>
-                                                    <input type="time" class="form-control" placeholder="hh:mm"
-                                                        name="engineer_in_time" id="engineer_in_time">
+                                                <div class="col-xl-6.col-lg-6.col-md-6.col-sm-12.mb-1">
+                                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                                        <label for="inputshort" class="col-form-label">Engineer In
+                                                            Time</label>
+                                                        <input type="time" class="form-control" placeholder="hh:mm"
+                                                            name="engineer_in_time" id="engineer_in_time" value="{{ date('H:i') }}">
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -201,7 +203,7 @@
                                                     <label for="inputDate" class="col-form-label">Engineer Out
                                                         Date</label>
                                                     <input type="date" class="form-control" placeholder="yy/mm/dd"
-                                                        id="engineer_out_date" name="engineer_out_date">
+                                                        id="engineer_out_date" name="engineer_out_date" value="{{ date('Y-m-d') }}">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
@@ -209,7 +211,7 @@
                                                     <label for="inputshort" class="col-form-label">Engineer out
                                                         Time</label>
                                                     <input type="time" class="form-control" id="engineer_out_time"
-                                                        name="engineer_out_time">
+                                                        name="engineer_out_time" value="{{ date('H:i') }}">
                                                 </div>
                                             </div>
 
@@ -217,8 +219,8 @@
                                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                                     <label for="inputJointengg" class="col-form-label">Joint
                                                         Engineer</label>
-                                                    <select class="form-control" name="joint_engineer_id[]"
-                                                        id="joint_engineer_id" multiple>
+                                                    <select class="form-control" name="jointengg[]"
+                                                        id="jointengg" multiple>
                                                         <option value="">Choose a Option</option>
                                                         @foreach (App\Models\Engineer::all() as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}
@@ -278,9 +280,9 @@
             $('#party_id').select2({
                 placeholder: 'Select an option'
             });
-            // $('#product_id').select2({
-            //     placeholder: 'Select an option'
-            // });
+            $('#jointengg').select2({
+                placeholder: 'Select an option'
+            });
             $('#complaint_type_id').select2({
                 placeholder: 'Select an option'
             });
@@ -316,6 +318,25 @@
                 })
 
             });
+
+            $('#sales_entry_id').on('change', function() {
+                var sales_entry = $(this).val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('sales-entry-details') }}",
+                    data: {
+                        'id': sales_entry
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        // $('#service_type_id').select2('data', {id: '123', text: 'res_data.primary_email'});
+                        $('#service_type_id').val(data.service_type_id).trigger('change');
+                        $('#service_type_id').trigger('change.select2');
+                    }
+                })
+            })
+
             $("#complaint-form").validate({
                 rules: {
                     date: {

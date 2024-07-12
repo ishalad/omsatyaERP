@@ -9,6 +9,7 @@ use App\Models\ComplaintServicePartsDetail;
 use App\Models\Firm;
 use App\Models\MachineSalesEntry;
 use App\Models\Year;
+use Carbon\Carbon;
 use Flasher\Toastr\Laravel\Facade\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -127,12 +128,129 @@ class ComplaintController extends Controller
         return response()->json($partyProducts, 200);
     }
 
-    public function report()
+    public function machineEntry(Request $request, Complaint $complaint)
     {
-        $defaultColumns = ['sr_no', 'date', 'time', 'complaint_no', 'party.name', 'party.address', 'sales_entry.mc_no', 'sales_entry.party.name', 'sales_entry.party.phone_no', 'complaint_type.name', 'service_type.name', 'status', 'created_at'];
-        $optionalColumns = ['updated_at', 'assigned_to', 'priority'];
+        // dd($request->all());
+        $machine_entry = MachineSalesEntry::where('id', $request->id)->first();
+        return response()->json($machine_entry, 200);
+    }
 
-        return view('complaint.report', compact('defaultColumns', 'optionalColumns'));
+    public function report(Request $request)
+    {
+        $data['title'] = 'Complaint Report';
+        $data['columns'] = [
+            'sr_no' => 'Sr. No.',
+            'date' => 'Date',
+            'time' => 'Time',
+            'complaint_no' => 'Complaint No',
+            'party_id' => 'Party',
+            'address' => 'Address',
+            'mobile_no' => 'Mobile No',
+            'area' => 'Area',
+            'product' => 'Product',
+            'product_serial' => 'Product Serial',
+            'mc_no' => 'Machine No',
+            'complain_type' => 'Complain Type',
+            'service_type' => 'Service Type',
+            'status' => 'Status',
+            'engineer' => 'Engineer',
+            'days' => 'Days',
+
+        ];
+        $complaints = Complaint::select('date', 'time', 'complaint_no', 'party_id', 'sales_entry_id', 'product_id',  'complaint_type_id', 'service_type_id', 'status_id', 'engineer_id')
+            ->with('party', 'product', 'complaintType', 'serviceType', 'status', 'engineer', 'salesEntry')
+            ->orderBy('updated_at', 'desc');
+        if (isset($request->phone_no)) {
+            $complaints->whereHas('party', function ($q) use ($request) {
+                $q->where('phone_no', 'like', '%' . $request->phone_no . '%');
+            });
+        }
+        if (isset($request->owner_id)) {
+            $complaints->whereHas('party', function ($q) use ($request) {
+                $q->where('owner_id', $request->owner_id);
+            });
+        }
+        if (isset($request->party_id)) {
+            $complaints->where('party_id', $request->party_id);
+        }
+        if (isset($request->engineer_id)) {
+            $complaints->where('engineer_id', $request->engineer_id);
+        }
+        if (isset($request->status_id)) {
+            $complaints->where('status_id', $request->status_id);
+        }
+        if (isset($request->service_type_id)) {
+            $complaints->where('service_type_id', $request->service_type_id);
+        }
+        if (isset($request->complaint_type_id)) {
+            $complaints->where('complaint_type_id', $request->complaint_type_id);
+        }
+        if (isset($request->complaint_no)) {
+            $complaints->where('complaint_no', 'like', '%' . $request->complaint_no . '%');
+        }
+        $complaints = $complaints->get();
+        if ($request->ajax()) {
+            return DataTables::of($complaints)
+                ->smart(false)
+                ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('engineer_name'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return Str::contains($row['engineer'], $request->get('engineer_name')) ? true : false;
+                        });
+                    }
+                    if (!empty($request->get('from_date')) && !empty($request->get('to_date'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return $row['date'] >= $request->get('from_date') && $row['date'] <= $request->get('to_date') ? true : false;
+                        });
+                    }
+                    if (!empty($request->get('status'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            return Str::contains($row['status'], $request->get('status')) ? true : false;
+                        });
+                    }
+                })
+                ->addColumn('party', function ($row) {
+                    return $row->party->name ?? 'N/A';
+                })
+                ->addColumn('address', function ($row) {
+                    return $row->party->address ?? 'N/A';
+                })
+                ->addColumn('mobile_no', function ($row) {
+                    return $row->party->phone_no ?? 'N/A';
+                })
+                ->addColumn('area', function ($row) {
+                    return $row->party->area->name ?? 'N/A';
+                })
+                ->addColumn('product', function ($row) {
+                    return $row->product->name ?? 'N/A';
+                })
+                ->addColumn('product_serial', function ($row) {
+                    return $row->salesEntry->serial_no ?? 'N/A';
+                })
+                ->addColumn('mc_no', function ($row) {
+                    return $row->salesEntry->mc_no ?? 'N/A';
+                })
+                ->addColumn('complaint_type', function ($row) {
+                    return $row->complaintType->name ?? 'N/A';
+                })
+                ->addColumn('service_type', function ($row) {
+                    return $row->serviceType->name ?? 'N/A';
+                })
+                ->addColumn('engineer', function ($row) {
+                    return $row->engineer->name ?? 'N/A';
+                })
+                ->addColumn('status', function ($row) {
+                    return $row->status->name ?? 'N/A';
+                })
+                ->addColumn('days', function ($row) {
+                    $date = Carbon::parse($row->date);
+                    return  $date->diffForHumans();
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('complaint.report', $data);
     }
 
     public function data(Request $request)

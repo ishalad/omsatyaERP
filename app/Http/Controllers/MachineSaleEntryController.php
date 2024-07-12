@@ -44,6 +44,24 @@ class MachineSaleEntryController extends Controller
             $file->move(public_path('public'), $filename);
             $data['image'] = $filename;
         }
+        if ($request->image1) {
+            $file = $request->file('image1');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('public'), $filename);
+            $data['image1'] = $filename;
+        }
+        if ($request->image2) {
+            $file = $request->file('image2');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('public'), $filename);
+            $data['image2'] = $filename;
+        }
+        if ($request->image3) {
+            $file = $request->file('image3');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('public'), $filename);
+            $data['image3'] = $filename;
+        }
         MachineSalesEntry::create($data);
         Toastr::success('Machine Sales Entry Added Successfully');
         return redirect()->route('MachineSales.index');
@@ -94,8 +112,26 @@ class MachineSaleEntryController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('public/uploads/MachineSalesEntry'), $filename);
+            $file->move(public_path('public'), $filename);
             $data['image'] = $filename;
+        }
+        if ($request->image1) {
+            $file = $request->file('image1');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('public'), $filename);
+            $data['image1'] = $filename;
+        }
+        if ($request->image2) {
+            $file = $request->file('image2');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('public'), $filename);
+            $data['image2'] = $filename;
+        }
+        if ($request->image3) {
+            $file = $request->file('image3');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('public'), $filename);
+            $data['image3'] = $filename;
         }
         $update = MachineSalesEntry::find($id)->update($data);
         if ($update) {

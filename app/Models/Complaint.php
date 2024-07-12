@@ -23,6 +23,11 @@ class Complaint extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function party()
+    {
+        return $this->belongsTo(Party::class);
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

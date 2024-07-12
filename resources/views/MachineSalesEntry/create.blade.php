@@ -142,10 +142,9 @@
                                     <label for="inputParty" class="col-form-label">Service Type</label> <i
                                         class="text-danger">*</i>
                                     <select class="form-control" name="service_type_id" id="service_type_id">
-                                        <option value="">Choose a Service Type</option>
                                         @foreach (App\Models\ServiceType::all() as $item)
                                             <option value="{{ $item->id }}"
-                                                @if (old('service_type_id') == $item->id) selected @endif>{{ $item->name }}
+                                                @if (old('service_type_id') == $item->id) selected @endif {{$loop->first ? 'selected' : ''}}>{{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -196,17 +195,31 @@
 
                             <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputImage" class="col-form-label">Image</label>
+                                    <label for="inputImage" class="col-form-label">Image 1</label>
                                     <input type="file" id="inputImage" class="form-control" name="image" />
                                 </div>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputImage" class="col-form-label">Image 2</label>
+                                    <input type="file" id="inputImage" class="form-control" name="image1" />
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputImage" class="col-form-label">Image 3</label>
+                                    <input type="file" id="inputImage" class="form-control" name="image2" />
+                                </div>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputImage" class="col-form-label">Image 4</label>
+                                    <input type="file" id="inputImage" class="form-control" name="image3" />
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Map Location</label>
                                     <input type="text" id="inputParty" class="form-control" name="map_url"
                                         value="{{ old('map_url') }}" />
                                 </div>
-                            </div>
-
-                            <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputActive" class="col-form-label">Is Active</label>
                                     <div class="form-check form-switch">

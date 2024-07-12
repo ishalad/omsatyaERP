@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class MachineSalesEntry extends Model
 {
     use HasFactory;
-    protected $fillable = ['firm_id', 'year_id', 'bill_no', 'date', 'party_id', 'product_id', 'serial_no', 'mc_no', 'install_date', 'service_expiry_date', 'free_service', 'order_no', 'remarks', 'service_type_id', 'image', 'lat', 'long', 'map_url', 'tag', 'is_active', 'mic_fitting_engineer_id', 'delivery_engineer_id'];
+    protected $fillable = [
+        'firm_id', 'year_id', 'bill_no', 'date', 'party_id', 'product_id', 'serial_no', 'mc_no',
+        'install_date', 'service_expiry_date', 'free_service', 'order_no', 'remarks', 'service_type_id', 'image', 'lat',
+        'long', 'map_url', 'tag', 'is_active', 'mic_fitting_engineer_id', 'delivery_engineer_id', 'image1', 'image2', 'image3'
+    ];
     protected $id = 'id';
 
     public function firm()

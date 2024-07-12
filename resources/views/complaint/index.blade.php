@@ -41,6 +41,7 @@
                                     <div class="col">
                                         <label for="status">Status</label>
                                         <select name="status" class="form-control">
+                                                <option value="" selected>All</option>
                                             @foreach (App\Models\Status::all() as $item)
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
@@ -150,6 +151,7 @@
             var table = $('#complaint-table').DataTable({
                processing: true,
                serverSide: true,
+               searching: false,
                // dom: 'Bfrtip',
                // buttons: [
                //     'copy', 'csv', 'excel', 'pdf', 'print'
@@ -183,6 +185,7 @@
                         { data: 'action', name: 'action', orderable: false, searchable: false }
                     ]
             });
+            console.log(table);
             $('#search-button').click(function() {
                 table.draw();
             })

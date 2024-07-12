@@ -68,6 +68,12 @@
                         <span class="side-menu__label">Complaints</span>
                     </a>
                 </li>
+                <li class="slide">
+                    <a href="{{route('complaints.report')}}" class="side-menu__item @if(request()->routeIs('complaints.report') ) active @endif">
+                        <i class="bx bxs-report side-menu__icon"></i>
+                        <span class="side-menu__label">Complaints Status Report</span>
+                    </a>
+                </li>
 
                 <li class="slide">
                     <a href="user-list.html" class="side-menu__item">

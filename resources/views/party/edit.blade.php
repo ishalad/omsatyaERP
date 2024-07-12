@@ -58,10 +58,10 @@
                                         aria-describedby="nameHelpInline" name="name"
                                         value="{{ $party->name ?? old('name') }}">
                                 </div>
-                                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputName" class="col-form-label">Party Email</label>
                                     <input type="text" id="inputName" class="form-control" name="email"
-                                        value="{{ $party->email ?? old('email') }}">
+                                        value="{{ $party->email ?? old('email') }}" required>
                                 </div>
                                 <!-- <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                                                                                         <label for="inputshort" class="col-form-label">short code</label>
@@ -74,7 +74,7 @@
                                 <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <label for="input-textarea" class="col-form-label">Address</label> <i
                                         class="text-danger">*</i>
-                                    <textarea type="text" class="form-control" id="input-textarea" placeholder="Address..." name="address">{{ $party->address ?? old('address') }}</textarea>
+                                    <textarea type="text" class="form-control" id="input-textarea" required placeholder="Address..." name="address">{{ $party->address ?? old('address') }}</textarea>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -134,15 +134,13 @@
                             <div class="row mb-2">
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputName" class="col-form-label">Pan number</label> <i
-                                        class="text-danger">*</i>
+                                    <label for="inputName" class="col-form-label">Pan number</label>
                                     <input type="text" class="form-control" name="pan_no"
                                         value="{{ $party->pan_no ?? old('pan_no') }}">
                                 </div>
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputGst" class="col-form-label">Gst no.</label> <i
-                                        class="text-danger">*</i>
+                                    <label for="inputGst" class="col-form-label">Gst no.</label> 
                                     <input type="text" id="inputGst" class="form-control"
                                         aria-describedby="nameHelpInline" name="gst_no"
                                         value="{{ $party->gst_no ?? old('gst_no') }}">
@@ -153,8 +151,9 @@
 
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputPan" class="col-form-label">Cont.Person</label>
-                                    <select class="form-control" id="contact_person_id" name="contact_person_id">
+                                    <label for="inputPan" class="col-form-label">Cont.Person</label> <i
+                                    class="text-danger">*</i>
+                                    <select class="form-control" id="contact_person_id" name="contact_person_id" required>
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\ContactPerson::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -164,8 +163,9 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputOwner" class="col-form-label">Owner Name</label>
-                                    <select class="form-control" id="owner_id" name="owner_id">
+                                    <label for="inputOwner" class="col-form-label">Owner Name</label> <i
+                                    class="text-danger">*</i>
+                                    <select class="form-control" id="owner_id" name="owner_id" required>
                                         <option value="">Choose a Option</option>
                                         @foreach (App\Models\Owner::all() as $item)
                                             <option value="{{ $item->id }}"
@@ -261,12 +261,10 @@
                         required: true
                     },
                     gst_no: {
-                        required: true,
                         minlength: 15,
                         maxlength: 15
                     },
                     pan_no: {
-                        required: true,
                         minlength: 10,
                         maxlength: 10
                     }

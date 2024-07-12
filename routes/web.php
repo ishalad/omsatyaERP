@@ -42,10 +42,11 @@ Route::group(['prefix' => 'complaints'], function () {
     Route::delete('/destroy/{complaint}', [ComplaintController::class, 'destroy'])->name('complaints.destroy')->middleware('auth');
     Route::post('/add-complaint-item-part', [ComplaintController::class, 'AddComplaintItemPart'])->name('complaints.itemPartStore')->middleware('auth');
     Route::get('/report', [ComplaintController::class, 'report'])->name('complaints.report');
-    // Route::get('/data', [ComplaintController::class, 'data'])->name('complaints.data');
+    Route::get('/data', [ComplaintController::class, 'data'])->name('complaints.data');
 });
 
 route::get('party-products', [ComplaintController::class, 'partyProducts'])->name('party-products')->middleware('auth');
+Route::get('sales-entry-details', [ComplaintController::class, 'machineEntry'])->name('sales-entry-details')->middleware('auth');
 
 
 

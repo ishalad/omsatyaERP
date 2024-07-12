@@ -28,6 +28,9 @@
                 $table->string('remarks', 255)->nullable();
                 $table->unsignedBigInteger('service_type_id'); // Foreign key to service_types
                 $table->string('image', 255)->nullable();
+                $table->string('image1', 255)->nullable();
+                $table->string('image2', 255)->nullable();
+                $table->string('image3', 255)->nullable();
                 $table->string('lat', 255)->nullable();
                 $table->string('long', 255)->nullable();
                 $table->string('map_url', 255)->nullable();

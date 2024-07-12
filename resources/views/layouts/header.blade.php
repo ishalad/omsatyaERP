@@ -103,7 +103,7 @@
             <!-- End::header-element -->
 
             <!-- Start::header-element -->
-            <div class="header-element meassage-dropdown">
+            {{-- <div class="header-element meassage-dropdown">
                 <!-- Start::header-link|dropdown-toggle -->
                 <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
                     data-bs-toggle="dropdown">
@@ -255,7 +255,7 @@
                     </div>
                 </div>
                 <!-- End::main-header-dropdown -->
-            </div>
+            </div> --}}
             <!-- End::header-element -->
 
             <!-- Start::header-element -->
@@ -407,7 +407,7 @@
             <!-- End::header-element -->
 
             <!-- Start::header-element -->
-            <div class="header-element cart-dropdown">
+            {{-- <div class="header-element cart-dropdown">
                 <!-- Start::header-link|dropdown-toggle -->
                 <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
                     data-bs-toggle="dropdown">
@@ -568,7 +568,7 @@
                     </div>
                 </div>
                 <!-- End::main-header-dropdown -->
-            </div>
+            </div> --}}
             <!-- End::header-element -->
 
             <!-- Start::header-element -->
@@ -578,7 +578,7 @@
                     class=" dropdown-toggle leading-none header-link d-flex justify-content-center"
                     id="mainHeaderProfile" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                     aria-expanded="false">
-                    <img src="/images/faces/9.jpg" alt="img" width="32" height="32"
+                    <img src="{{asset('/images/faces/21104.png')}}" alt="img" width="32" height="32"
                         class="rounded-circle">
                     <!-- <div class="d-flex align-items-center">
                 </div> -->
@@ -589,7 +589,7 @@
                     <div class="main-header-profile bg-primary border-bottom p-3">
                         <div class="d-flex wd-100p">
                             <div class="main-img-user">
-                                <img alt="" src="/images/faces/9.jpg" class="avatar avatar-md">
+                                <img alt="" src="{{asset('/images/faces/21104.png')}}" class="avatar avatar-md">
                             </div>
                             <div class="ms-2 my-auto text-white">
                                 <h6 class="mb-0 text-fixed-white">{{ Auth::user()->name }}r</h6>

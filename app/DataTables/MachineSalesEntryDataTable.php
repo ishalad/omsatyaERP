@@ -34,7 +34,7 @@ class MachineSalesEntryDataTable extends DataTable
      */
     public function query(MachineSalesEntry $model): QueryBuilder
     {
-        return $model->newQuery()->with('party', 'product', 'serviceType')->orderBy('created_at', 'desc');
+        return $model->newQuery()->with('party', 'product', 'serviceType')->orderBy('date', 'desc');
     }
 
     /**

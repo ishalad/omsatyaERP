@@ -28,6 +28,8 @@ class PartyCreateRequest extends FormRequest
             "phone_no" => "required|numeric|digits:10",
             "gst_no" => "alphanum|size:15",
             "pan_no" => "alphanum|size:10",
+            "contact_person_id" => "required",
+            "owner_id" => "required",
         ];
     }
 }

@@ -114,7 +114,7 @@
                                     <label for="inputProdsr" class="col-form-label">Serial No.</label> <i
                                         class="text-danger">*</i>
                                     <input type="text" id="inputProdsr" class="form-control" name="serial_no"
-                                        value="{{ $machine->serial_no ?? old('serial_no') }}" />
+                                        value="{{ $machine->serial_no ?? old('serial_no') }}" disabled/>
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputM/C" class="col-form-label">M/c No.</label> <i
@@ -217,15 +217,29 @@
                                     <label for="inputImage" class="col-form-label">Image</label>
                                     <input type="file" id="inputImage" class="form-control" name="image" />
                                 </div>
+                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputImage" class="col-form-label">Image 2</label>
+                                    <input type="file" id="inputImage" class="form-control" name="image1" />
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputImage" class="col-form-label">Image 3</label>
+                                    <input type="file" id="inputImage" class="form-control" name="image2" />
+                                </div>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputImage" class="col-form-label">Image 4</label>
+                                    <input type="file" id="inputImage" class="form-control" name="image3" />
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="row mb-1">
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputParty" class="col-form-label">Map Location</label>
                                     <input type="text" id="inputParty" class="form-control" name="map_url"
                                         value="{{ $machine->map_url ?? old('map_url') }}" />
                                 </div>
-
-                            </div>
-
-                            <div class="row mb-1">
                                 <!-- <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                                                                                 <label for="inputTag" class="col-form-label">Tag</label>
                                                                                                 <input type="text" id="inputTag" class="form-control" />
