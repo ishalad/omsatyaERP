@@ -191,7 +191,7 @@ class ComplaintController extends Controller
         $complaints = $complaints->get();
         if ($request->ajax()) {
             return DataTables::of($complaints)
-                ->smart(false)
+                // ->smart(false)
                 ->addIndexColumn()
                 ->filter(function ($instance) use ($request) {
                     if (!empty($request->get('engineer_name'))) {
@@ -209,6 +209,11 @@ class ComplaintController extends Controller
                             return Str::contains($row['status'], $request->get('status')) ? true : false;
                         });
                     }
+                    // if(!empty($request->get('search_key'))){
+                    //     $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+
+                    //     })
+                    // }
                 })
                 ->addColumn('party', function ($row) {
                     return $row->party->name ?? 'N/A';

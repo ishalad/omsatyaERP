@@ -2,6 +2,7 @@
 <!-- resources/views/complaints/report.blade.php -->
 
 @extends('layouts.app')
+@section('title', $title)
 
 @section('content')
 <div class="container-fluid">
@@ -151,7 +152,7 @@
         var table = $('#complaint-table').DataTable({
                processing: true,
                serverSide: true,
-               // dom: 'Bfrtip',
+               dom: 'Bfrtip',
                buttons: [
                    'copy', 'csv', 'excel', 'pdf', 'print'
                ],
@@ -174,28 +175,30 @@
                    }
                },
                columns: [
-                        { data: 'DT_RowIndex', name: 'No', searchable:false },
-                        { data: 'date', name: 'date' , searchable:false},
-                        { data: 'time', name: 'time' , searchable:false},
-                        { data: 'complaint_no', name: 'complaint_no' , searchable:false},
-                        { data: 'party', name: 'party' , searchable:false},
-                        { data: 'address', name: 'address', title: 'Address', searchable:false },
-                        { data: 'mobile_no', name: 'mobile_no', title: 'Mobile Number', searchable:false },
-                        { data: 'area', name: 'area' , searchable:false},
-                        { data: 'product', name: 'product', searchable:false },
-                        { data: 'product_serial', name: 'product_serial', title: 'serial no' , searchable:false},
-                        { data: 'mc_no', name: 'mc_no', title: 'Machine No', searchable:false },
-                        { data: 'complaint_type', name: 'complaint_type', searchable:false },
-                        { data: 'service_type', name: 'service_type', searchable:false },
-                        { data: 'status', name: 'status', searchable:false },
-                        { data: 'engineer', name: 'engineer' , searchable:false},
-                        { data: 'days', name: 'days', searchable:false },
+                        { data: 'DT_RowIndex', name: 'No' },
+                        { data: 'date', name: 'date' },
+                        { data: 'time', name: 'time' },
+                        { data: 'complaint_no', name: 'complaint_no' },
+                        { data: 'party', name: 'party' },
+                        { data: 'address', name: 'address', title: 'Address' },
+                        { data: 'mobile_no', name: 'mobile_no', title: 'Mobile Number' },
+                        { data: 'area', name: 'area' },
+                        { data: 'product', name: 'product' },
+                        { data: 'product_serial', name: 'product_serial', title: 'serial no' },
+                        { data: 'mc_no', name: 'mc_no', title: 'Machine No' },
+                        { data: 'complaint_type', name: 'complaint_type' },
+                        { data: 'service_type', name: 'service_type' },
+                        { data: 'status', name: 'status' },
+                        { data: 'engineer', name: 'engineer' },
+                        { data: 'days', name: 'days' },
                     ]
             });
             $('#search-button').click(function() {
                 table.draw();
             })
-            $('#complaint-table_filter').hide();
+
+            
+            // $('#complaint-table_filter').hide();
     });
 </script>
 @endsection

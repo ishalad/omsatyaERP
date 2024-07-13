@@ -16,14 +16,14 @@
         <!-- Start::nav -->
         <nav class="main-menu-container nav nav-pills flex-column sub-open">
             <div class="slide-left" id="slide-left">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
-                    viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
                     <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"></path>
                 </svg>
             </div>
             <ul class="main-menu mt-5">
                 <li class="slide">
-                    <a href="{{route('dashboard')}}" class="side-menu__item @if(request()->routeIs('dashboard')) active @endif">
+                    <a href="{{route('dashboard')}}"
+                        class="side-menu__item @if(request()->routeIs('dashboard')) active @endif">
                         <i class="bx bx-desktop side-menu__icon"></i>
                         <span class="side-menu__label">Dashboard</span>
                     </a>
@@ -35,7 +35,8 @@
                     </a>
                 </li> --}}
                 <li class="slide">
-                    <a href="{{route('parties.index')}}" class="side-menu__item @if(request()->routeIs('parties.index') || request()->routeIs('parties.create') || request()->routeIs('parties.edit')) active @endif">
+                    <a href="{{route('parties.index')}}"
+                        class="side-menu__item @if(request()->routeIs('parties.index') || request()->routeIs('parties.create') || request()->routeIs('parties.edit')) active @endif">
                         <i class="bx bxs-user-account side-menu__icon"></i>
                         <span class="side-menu__label">Party master</span>
                     </a>
@@ -49,7 +50,8 @@
                 </li> --}}
 
                 <li class="slide">
-                    <a href="{{route('MachineSales.index')}}" class="side-menu__item @if(request()->routeIs('MachineSales.index') || request()->routeIs('MachineSales.create') || request()->routeIs('MachineSales.edit')) active @endif">
+                    <a href="{{route('MachineSales.index')}}"
+                        class="side-menu__item @if(request()->routeIs('MachineSales.index') || request()->routeIs('MachineSales.create') || request()->routeIs('MachineSales.edit')) active @endif">
                         <i class="bx bx-cart side-menu__icon"></i>
                         <span class="side-menu__label">Machines Sells</span>
                     </a>
@@ -63,22 +65,33 @@
                 </li> --}}
 
                 <li class="slide">
-                    <a href="{{route('complaints.index')}}" class="side-menu__item @if(request()->routeIs('complaints.index') || request()->routeIs('complaints.create') || request()->routeIs('complaints.edit')) active @endif">
+                    <a href="{{route('complaints.index')}}"
+                        class="side-menu__item @if(request()->routeIs('complaints.index') || request()->routeIs('complaints.create') || request()->routeIs('complaints.edit')) active @endif">
                         <i class="bx bx-error-alt side-menu__icon"></i>
                         <span class="side-menu__label">Complaints</span>
                     </a>
                 </li>
                 <li class="slide">
-                    <a href="{{route('complaints.report')}}" class="side-menu__item @if(request()->routeIs('complaints.report') ) active @endif">
+                    <a href="{{route('complaints.report')}}"
+                        class="side-menu__item @if(request()->routeIs('complaints.report') ) active @endif">
                         <i class="bx bxs-report side-menu__icon"></i>
                         <span class="side-menu__label">Complaints Status Report</span>
                     </a>
                 </li>
 
                 <li class="slide">
-                    <a href="user-list.html" class="side-menu__item">
+                    <a href="{{route('users.index')}}"
+                        class="side-menu__item @if(request()->routeIs('users.index') || request()->routeIs('users.create') || request()->routeIs('users.edit')) active @endif">
                         <i class="bx bx-user side-menu__icon"></i>
                         <span class="side-menu__label">Users</span>
+                    </a>
+                </li>
+
+                <li class="slide">
+                    <a href="{{route('engineers.index')}}"
+                        class="side-menu__item @if(request()->routeIs('engineers.index') || request()->routeIs('engineers.create') || request()->routeIs('engineers.edit')) active @endif">
+                        <i class="bx bx-user side-menu__icon"></i>
+                        <span class="side-menu__label">Engineers</span>
                     </a>
                 </li>
 
@@ -113,8 +126,8 @@
                     </ul>
                 </li> --}}
             </ul>
-            <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
-                    width="24" height="24" viewBox="0 0 24 24">
+            <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"
+                    height="24" viewBox="0 0 24 24">
                     <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
                 </svg></div>
         </nav>

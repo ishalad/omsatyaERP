@@ -38,7 +38,7 @@ class PartyController extends Controller
         if ($request->validated()) {
             Party::create($data);
             Toastr::success('Party created successfully');
-            return redirect()->route('parties.index')->with('success', 'Party created successfully');
+            return redirect()->route('parties.index');
         } else {
             return redirect()->route('parties.create')->with($request->errors());
         }
@@ -60,7 +60,7 @@ class PartyController extends Controller
         if ($request->validated()) {
             $party->update($data);
             Toastr::success('Party updated successfully');
-            return redirect()->route('parties.index')->with('success', 'Party updated successfully');
+            return redirect()->route('parties.index');
         } else {
             return redirect()->route('parties.edit', $party)->with($request->errors());
         }

@@ -11,6 +11,7 @@
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^3.1",
         "proengsoft/laravel-jsvalidation": "^4.9",
+        "spatie/laravel-permission": "^6.9",
         "yajra/laravel-datatables": "^11.0",
         "yajra/laravel-datatables-oracle": "^11.0",
         "yoeunes/toastr": "^3.0"

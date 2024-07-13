@@ -188,7 +188,7 @@
                                                     <label for="inputDate" class="col-form-label">Engineer In Date</label>
                                                     <input type="date" class="form-control" placeholder="yy/mm/dd"
                                                         name="engineer_in_date" id="engineer_in_date"
-                                                        value="{{ $complaint->engineer_in_date ?? date('Y-m-d') }}">
+                                                        value="{{ $complaint->engineer_in_date }}">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
@@ -197,7 +197,7 @@
                                                         Time</label>
                                                     <input type="time" class="form-control" placeholder="hh:mm"
                                                         name="engineer_in_time" id="engineer_in_time"
-                                                        value="{{ $complaint->engineer_in_time ?? date('H:i') }}">
+                                                        value="{{ $complaint->engineer_in_time  }}">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
@@ -206,7 +206,7 @@
                                                         Date</label>
                                                     <input type="date" class="form-control" placeholder="yy/mm/dd"
                                                         id="engineer_out_date" name="engineer_out_date"
-                                                        value="{{ $complaint->engineer_out_date ?? date('Y-m-d') }}">
+                                                        value="{{ $complaint->engineer_out_date  }}">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-1">
@@ -215,7 +215,7 @@
                                                         Time</label>
                                                     <input type="time" class="form-control" id="engineer_out_time"
                                                         name="engineer_out_time"
-                                                        value="{{ $complaint->engineer_out_time ?? date('H:i') }}">
+                                                        value="{{ $complaint->engineer_out_time  }}">
                                                 </div>
                                             </div>
 
@@ -342,7 +342,23 @@
             $('#jointengg').select2({
                 placeholder: 'Select an option'
             });
+            $('#engineer_in_date').on('change', function() {
+                const currentTime = new Date();
+                const hours = currentTime.getHours();
+                const minutes = currentTime.getMinutes();
+                const formattedTime = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+                $('#engineer_in_time').val(formattedTime);
+                $('#engineer_in_time').trigger('change');
 
+            })
+            $('#engineer_out_date').on('change', function() {
+                const currentTime = new Date();
+                const hours = currentTime.getHours();
+                const minutes = currentTime.getMinutes();
+                const formattedTime = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+                $('#engineer_out_time').val(formattedTime);
+                $('#engineer_out_time').trigger('change');
+            })
 
             $("#complaint-form").validate({
                 rules: {

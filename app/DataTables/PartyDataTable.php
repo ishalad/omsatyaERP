@@ -40,7 +40,7 @@ class PartyDataTable extends DataTable
      */
     public function query(Party $model): QueryBuilder
     {
-        return $model->newQuery()->with('city', 'state', 'area', 'owner', 'contactPerson');
+        return $model->newQuery()->with('city', 'state', 'area', 'owner', 'contactPerson')->orderBy('created_at', 'desc');
     }
 
     /**

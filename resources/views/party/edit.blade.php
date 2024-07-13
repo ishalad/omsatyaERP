@@ -134,17 +134,17 @@
                             <div class="row mb-2">
 
                                 <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
-                                    <label for="inputName" class="col-form-label">Pan number</label>
-                                    <input type="text" class="form-control" name="pan_no"
-                                        value="{{ $party->pan_no ?? old('pan_no') }}">
-                                </div>
-
-                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
                                     <label for="inputGst" class="col-form-label">Gst no.</label> 
                                     <input type="text" id="inputGst" class="form-control"
                                         aria-describedby="nameHelpInline" name="gst_no"
                                         value="{{ $party->gst_no ?? old('gst_no') }}">
                                 </div>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                                    <label for="inputName" class="col-form-label">Pan number</label>
+                                    <input type="text" class="form-control" name="pan_no"
+                                        value="{{ $party->pan_no ?? old('pan_no') }}">
+                                </div>
+
                             </div>
 
                             <div class="row mb-2">
